@@ -1,0 +1,39 @@
+================================================================================
+MobileNet V1 Real-World Validation Report
+================================================================================
+
+Generated: 2025-10-17 16:17:09
+Total Samples: 184
+
+ACCURACY METRICS:
+----------------------------------------
+Raw Model Accuracy:        98.4%
+Processed Model Accuracy:  98.4%
+Accuracy Improvement:      +0.0%
+
+CONFIDENCE IMPROVEMENTS:
+----------------------------------------
+Average Improvement:       +0.000
+Images Improved:           0/184 (0.0%)
+
+CLASS-SPECIFIC PERFORMANCE:
+----------------------------------------
+Normal - Raw:              100.0%
+Normal - Processed:        100.0%
+Pneumonia - Raw:           97.0%
+Pneumonia - Processed:     97.0%
+
+PERFORMANCE:
+----------------------------------------
+Average Processing Time:   705.7 ms
+
+EDGE CASES:
+----------------------------------------
+Low Confidence Correct:    3 cases
+High Improvement Cases:    0 cases
+
+CONCLUSIONS:
+----------------------------------------
+⚠️  Preprocessing may not improve accuracy
+⚠️  Limited images benefit from preprocessing
+⚠️  Consider optimization for real-time applications

@@ -1,0 +1,8 @@
+[
+  {
+    "path": "/home/sriskans/pediatric-pneumonia-ai/data/test/pneumonia/person54_bacteria_258.jpeg",
+    "filename": "person54_bacteria_258.jpeg",
+    "normal_prob": 0.6156114339828491,
+    "pneumonia_prob": 0.38438862562179565
+  }
+]

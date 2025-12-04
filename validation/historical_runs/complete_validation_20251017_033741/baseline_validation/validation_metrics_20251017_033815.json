@@ -1,0 +1,17 @@
+{
+  "total_samples": 200,
+  "accuracy_raw": 0.985,
+  "accuracy_processed": 0.985,
+  "accuracy_improvement": 0.0,
+  "avg_confidence_improvement": 0.0,
+  "positive_improvements": 0,
+  "improvement_rate": 0.0,
+  "avg_processing_time_ms": 80.11751080455724,
+  "normal_accuracy_raw": 1.0,
+  "normal_accuracy_processed": 1.0,
+  "pneumonia_accuracy_raw": 0.97,
+  "pneumonia_accuracy_processed": 0.97,
+  "edge_cases_count": 4,
+  "high_improvement_count": 0,
+  "timestamp": "2025-10-17T03:38:15.270749"
+}

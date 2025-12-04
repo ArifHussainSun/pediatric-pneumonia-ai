@@ -1,0 +1,163 @@
+# DGX Station Optimized Configuration
+# For Tesla V100-DGS GPUs (Volta architecture)
+# Multi-user environment with local storage
+
+# System Information
+system:
+  gpu_count: 4
+  gpu_model: "Tesla V100-DGS"
+  gpu_memory: "32GB"
+  architecture: "Volta"
+  cuda_capability: "7.0"
+  cpu_cores: 40
+  system_memory: "256GB"
+
+# Model configuration - Optimized for V100 Tensor Cores
+model:
+  type: "mobilenet"  # Lightweight model for efficiency
+  params:
+    variant: "v2"
+    size: "standard"
+    num_classes: 2
+    freeze_layers: 50
+    dropout_rate: 0.5
+
+# Training configuration - Optimized for Volta V100
+training:
+  epochs: 100
+  batch_size: 48  # Increased for MobileNet (lightest model) (48*4 = 192 effective)
+  gradient_accumulation_steps: 1
+  use_amp: true  # Essential for Tensor Core utilization
+  max_grad_norm: 1.0
+
+  # V100-specific optimizations
+  tensor_core_precision: true
+  optimize_for_volta: true
+  memory_efficient: true
+
+# Optimizer - Tuned for medical imaging
+optimizer:
+  type: "adamw"
+  lr: 0.0001  # Conservative for medical data
+  weight_decay: 0.01
+  betas: [0.9, 0.999]
+  eps: 1e-8
+
+  # V100 optimization
+  fused_adamw: true  # Use fused optimizer for speed
+
+# Scheduler - Smooth convergence
+scheduler:
+  type: "cosine"
+  min_lr: 0.000001
+  warmup_epochs: 5  # Gentle warmup for stability
+
+# Loss function - Medical data optimized
+loss: "cross_entropy"
+class_weights: true  # Handle pneumonia/normal imbalance
+
+# Data configuration - Multi-user DGX optimized
+data:
+  train_dir: "data/train"
+  val_dir: "data/test"
+  image_size: 224  # Optimal for pretrained models
+
+  # Multi-user DGX optimizations
+  num_workers: 6   # Conservative for shared system (40 cores / 4 GPUs = 10, reduced for others)
+  pin_memory: true
+  prefetch_factor: 2
+  persistent_workers: true  # Reduce worker startup overhead
+
+  # Local storage optimizations
+  cache_dataset: true
+  preload_data: false  # Don't preload in multi-user environment
+
+# Augmentation - Medical-safe only
+augmentation:
+  horizontal_flip: 0.5
+  rotation: 5  # Small rotations only for chest X-rays
+  brightness: 0.1
+  contrast: 0.1
+  # No vertical flip (not safe for chest X-rays)
+  normalize:
+    mean: [0.485, 0.456, 0.406]
+    std: [0.229, 0.224, 0.225]
+
+# Distributed training - V100 NVLink optimized
+distributed:
+  backend: "nccl"
+  master_addr: "localhost"
+  master_port: 12355
+
+  # V100 NVLink 2.0 optimizations
+  nccl_tree_threshold: 0
+  nccl_ib_disable: 1  # Use NVLink instead of InfiniBand
+  nccl_p2p_disable: 0  # Enable P2P over NVLink
+
+# Environment variables for V100
+environment:
+  CUDA_VISIBLE_DEVICES: "0,1,2,3"
+  NCCL_DEBUG: "INFO"
+  NCCL_TREE_THRESHOLD: "0"
+  NCCL_IB_DISABLE: "1"
+  OMP_NUM_THREADS: "10"  # 40 cores / 4 GPUs
+  CUDA_LAUNCH_BLOCKING: "0"
+  CUDNN_BENCHMARK: "1"
+
+# Memory management - 32GB V100 optimized
+memory:
+  max_memory_per_gpu: "30GB"  # Leave 2GB for system
+  gradient_checkpointing: false  # V100 has enough memory
+
+  # Multi-user considerations
+  memory_fraction: 0.9  # Reserve some memory for other users
+  allow_growth: true
+
+# Logging and checkpointing - Multi-user friendly
+output_dir: "./outputs/dgx_station_experiment"
+log_interval: 25  # More frequent logging for monitoring
+save_interval: 5   # More frequent saves in case of interruption
+tensorboard_dir: "./outputs/tensorboard"
+
+# Multi-user scheduling considerations
+scheduling:
+  priority: "normal"  # Be nice to other users
+  max_runtime_hours: 48  # Reasonable time limit
+  checkpoint_on_preemption: true
+  resume_from_checkpoint: true
+
+# Performance monitoring
+monitoring:
+  gpu_utilization_target: 85  # Good utilization without starving others
+  memory_utilization_target: 80
+  log_system_stats: true
+  profile_memory: false  # Disable in multi-user environment
+
+# Model-specific optimizations
+model_configs:
+  xception:
+    freeze_layers: 100
+    dropout_rate: 0.5
+    # V100 Tensor Core optimizations
+    use_tensor_cores: true
+    mixed_precision_loss_scale: 128
+
+  fusion:
+    model_type: "xception_vgg"
+    freeze_early_layers: true
+    dropout_rate: 0.5
+    # Higher memory usage - reduce batch size if needed
+    fallback_batch_size: 20
+
+  vgg:
+    variant: "standard"
+    freeze_layers: 10
+    dropout_rate: 0.5
+    # Lightweight option for faster experiments
+    lightweight_available: true
+
+  mobilenet:
+    variant: "v2"  # v2 works well on V100
+    size: "standard"
+    freeze_layers: 50
+    # Good for testing and quick iterations

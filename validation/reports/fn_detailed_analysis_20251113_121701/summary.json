@@ -1,0 +1,186 @@
+{
+  "total_false_negatives": 21,
+  "average_metrics": {
+    "brightness": {
+      "mean": 0.44203330867488316,
+      "std": 0.06792304333249342,
+      "min": 0.32190085516381883,
+      "max": 0.6174926868967402
+    },
+    "contrast": {
+      "mean": 0.22897938793870787,
+      "std": 0.03015726347342557,
+      "min": 0.17330840921929058,
+      "max": 0.2759958602660096
+    },
+    "sharpness": {
+      "mean": 0.008693445093560886,
+      "std": 0.004461200736828506,
+      "min": 0.005402916367000169,
+      "max": 0.023427189085349447
+    },
+    "histogram_std": {
+      "mean": 0.005272985436022282,
+      "std": 0.0020195876713842154,
+      "min": 0.003040481824427843,
+      "max": 0.010826114565134048
+    },
+    "histogram_entropy": {
+      "mean": 7.355144500732422,
+      "std": 0.18455485999584198,
+      "min": 6.884406089782715,
+      "max": 7.556629657745361
+    },
+    "edge_density": {
+      "mean": 0.007106305338145101,
+      "std": 0.003470059543138477,
+      "min": 0.002476943485034074,
+      "max": 0.01468484680693983
+    },
+    "min_intensity": {
+      "mean": 0.0,
+      "std": 0.0,
+      "min": 0,
+      "max": 0
+    },
+    "max_intensity": {
+      "mean": 255.0,
+      "std": 0.0,
+      "min": 255,
+      "max": 255
+    },
+    "mean_intensity": {
+      "mean": 112.71849371209521,
+      "std": 17.320376049785825,
+      "min": 82.0847180667738,
+      "max": 157.46063515866874
+    },
+    "median_intensity": {
+      "mean": 117.57142857142857,
+      "std": 21.931867287604316,
+      "min": 69.0,
+      "max": 172.0
+    },
+    "p10": {
+      "mean": 22.523809523809526,
+      "std": 20.643502488951285,
+      "min": 0.0,
+      "max": 65.0
+    },
+    "p25": {
+      "mean": 70.80952380952381,
+      "std": 21.08174350705017,
+      "min": 42.0,
+      "max": 118.0
+    },
+    "p75": {
+      "mean": 161.0,
+      "std": 22.189658681037713,
+      "min": 102.0,
+      "max": 213.0
+    },
+    "p90": {
+      "mean": 185.95238095238096,
+      "std": 19.867360623409176,
+      "min": 145.0,
+      "max": 236.0
+    },
+    "dynamic_range": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    }
+  },
+  "strategy_improvements": {
+    "none": 0,
+    "conservative": 0,
+    "light_global": 0,
+    "medium_global": 14,
+    "roi_clahe": 3
+  },
+  "potentially_fixable": 13,
+  "fixable_percentage": 61.904761904761905,
+  "top_improvable_cases": [
+    {
+      "filename": "person104_virus_191.jpeg",
+      "strategy": "medium_global",
+      "original_prob": 0.01801418699324131,
+      "improved_prob": 0.997161865234375,
+      "improvement": 0.9791476782411337,
+      "would_fix": true
+    },
+    {
+      "filename": "person1156_virus_1936.jpeg",
+      "strategy": "medium_global",
+      "original_prob": 0.03637458756566048,
+      "improved_prob": 0.9985716342926025,
+      "improvement": 0.9621970467269421,
+      "would_fix": true
+    },
+    {
+      "filename": "person1461_virus_2510.jpeg",
+      "strategy": "medium_global",
+      "original_prob": 0.005796709097921848,
+      "improved_prob": 0.9252200126647949,
+      "improvement": 0.9194233035668731,
+      "would_fix": true
+    },
+    {
+      "filename": "person1429_bacteria_3688.jpeg",
+      "strategy": "roi_clahe",
+      "original_prob": 0.056968532502651215,
+      "improved_prob": 0.9529582858085632,
+      "improvement": 0.895989753305912,
+      "would_fix": true
+    },
+    {
+      "filename": "person1589_bacteria_4172.jpeg",
+      "strategy": "medium_global",
+      "original_prob": 0.12153367698192596,
+      "improved_prob": 0.9668598771095276,
+      "improvement": 0.8453262001276016,
+      "would_fix": true
+    },
+    {
+      "filename": "person1477_virus_2561.jpeg",
+      "strategy": "medium_global",
+      "original_prob": 0.002653594361618161,
+      "improved_prob": 0.8238797783851624,
+      "improvement": 0.8212261840235442,
+      "would_fix": true
+    },
+    {
+      "filename": "person52_bacteria_251.jpeg",
+      "strategy": "medium_global",
+      "original_prob": 0.221602663397789,
+      "improved_prob": 0.9975335597991943,
+      "improvement": 0.7759308964014053,
+      "would_fix": true
+    },
+    {
+      "filename": "person702_virus_1299.jpeg",
+      "strategy": "roi_clahe",
+      "original_prob": 0.00504858884960413,
+      "improved_prob": 0.764704704284668,
+      "improvement": 0.7596561154350638,
+      "would_fix": true
+    },
+    {
+      "filename": "person498_bacteria_2100.jpeg",
+      "strategy": "medium_global",
+      "original_prob": 0.2612105906009674,
+      "improved_prob": 0.9984667897224426,
+      "improvement": 0.7372561991214752,
+      "would_fix": true
+    },
+    {
+      "filename": "person362_bacteria_1652.jpeg",
+      "strategy": "medium_global",
+      "original_prob": 0.3759557604789734,
+      "improved_prob": 0.999397873878479,
+      "improvement": 0.6234421133995056,
+      "would_fix": true
+    }
+  ]
+}

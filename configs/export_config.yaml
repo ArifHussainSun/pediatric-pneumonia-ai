@@ -1,0 +1,285 @@
+# Export Configuration for Pediatric Pneumonia Detection Models
+# This file defines export settings for different deployment scenarios
+
+# Global export settings
+global:
+  input_shape: [1, 3, 224, 224]  # [batch, channels, height, width]
+  output_dir: "./exports"
+  verify_exports: true
+  save_benchmarks: true
+
+# Model-specific configurations
+models:
+  xception:
+    description: "High-accuracy Xception model for clinical deployment"
+    priority: "accuracy"
+    recommended_formats: ["onnx", "torchscript"]
+    export_settings:
+      onnx:
+        opset_version: 11
+        optimization_level: "all"
+        dynamic_batch: true
+      torchscript:
+        method: "trace"
+        optimize_for_inference: true
+        mobile_optimize: false
+
+  vgg:
+    description: "VGG16 model for balanced performance and interpretability"
+    priority: "balance"
+    recommended_formats: ["onnx", "torchscript"]
+    export_settings:
+      onnx:
+        opset_version: 11
+        optimization_level: "extended"
+        dynamic_batch: true
+      torchscript:
+        method: "trace"
+        optimize_for_inference: true
+        mobile_optimize: false
+
+  mobilenet:
+    description: "Lightweight MobileNet for mobile and edge deployment"
+    priority: "efficiency"
+    recommended_formats: ["onnx", "torchscript", "coreml", "tflite"]
+    export_settings:
+      onnx:
+        opset_version: 11
+        optimization_level: "basic"
+        dynamic_batch: false
+        quantization: true
+      torchscript:
+        method: "trace"
+        optimize_for_inference: true
+        mobile_optimize: true
+      coreml:
+        minimum_deployment_target: "iOS13"
+        compute_precision: "Float16"
+      tflite:
+        quantization: "dynamic"
+        optimization: "size"
+
+  fusion:
+    description: "Multi-backbone fusion model for maximum accuracy"
+    priority: "accuracy"
+    recommended_formats: ["onnx", "torchscript"]
+    export_settings:
+      onnx:
+        opset_version: 13
+        optimization_level: "all"
+        dynamic_batch: true
+      torchscript:
+        method: "trace"
+        optimize_for_inference: true
+        mobile_optimize: false
+
+  xception_lstm:
+    description: "Experimental CNN-LSTM hybrid model"
+    priority: "research"
+    recommended_formats: ["torchscript"]
+    export_settings:
+      torchscript:
+        method: "script"  # LSTM requires scripting
+        optimize_for_inference: false
+        mobile_optimize: false
+
+# Deployment target configurations
+deployment_targets:
+  cloud_inference:
+    description: "Cloud-based inference servers (AWS, Azure, GCP)"
+    hardware: "GPU/CPU servers"
+    recommended_models: ["xception", "fusion", "vgg"]
+    formats: ["onnx", "torchscript"]
+    optimizations:
+      batch_processing: true
+      dynamic_batching: true
+      fp16_precision: true
+      memory_optimization: false
+
+  edge_computing:
+    description: "Edge computing devices and IoT"
+    hardware: "ARM processors, limited memory"
+    recommended_models: ["mobilenet", "vgg"]
+    formats: ["onnx", "tflite"]
+    optimizations:
+      batch_processing: false
+      dynamic_batching: false
+      fp16_precision: true
+      memory_optimization: true
+      quantization: true
+
+  mobile_devices:
+    description: "iPads, tablets, smartphones"
+    hardware: "Mobile processors"
+    recommended_models: ["mobilenet"]
+    formats: ["coreml", "tflite", "onnx"]
+    optimizations:
+      batch_processing: false
+      dynamic_batching: false
+      fp16_precision: true
+      memory_optimization: true
+      quantization: true
+      mobile_specific: true
+
+  web_deployment:
+    description: "Browser-based inference with JavaScript"
+    hardware: "Client browsers"
+    recommended_models: ["mobilenet", "vgg"]
+    formats: ["onnx"]  # ONNX.js support
+    optimizations:
+      batch_processing: false
+      dynamic_batching: false
+      fp16_precision: false  # Limited browser support
+      memory_optimization: true
+      quantization: true
+
+  embedded_systems:
+    description: "Microcontrollers and embedded devices"
+    hardware: "Limited compute and memory"
+    recommended_models: ["mobilenet"]
+    formats: ["tflite"]
+    optimizations:
+      batch_processing: false
+      dynamic_batching: false
+      fp16_precision: false
+      memory_optimization: true
+      quantization: true
+      int8_quantization: true
+
+# Export quality profiles
+quality_profiles:
+  maximum_accuracy:
+    description: "Prioritize accuracy over size/speed"
+    target_accuracy_loss: 0.0  # No accuracy loss acceptable
+    models: ["fusion", "xception"]
+    formats: ["onnx", "torchscript"]
+    optimizations:
+      quantization: false
+      pruning: false
+      knowledge_distillation: false
+
+  balanced:
+    description: "Balance accuracy, size, and speed"
+    target_accuracy_loss: 0.5  # Up to 0.5% accuracy loss acceptable
+    models: ["xception", "vgg"]
+    formats: ["onnx", "torchscript"]
+    optimizations:
+      quantization: "dynamic"
+      pruning: false
+      knowledge_distillation: false
+
+  maximum_efficiency:
+    description: "Prioritize size and speed over accuracy"
+    target_accuracy_loss: 2.0  # Up to 2% accuracy loss acceptable
+    models: ["mobilenet"]
+    formats: ["tflite", "coreml", "onnx"]
+    optimizations:
+      quantization: "int8"
+      pruning: true
+      knowledge_distillation: true
+
+# Platform-specific settings
+platforms:
+  ios:
+    format: "coreml"
+    framework: "Core ML"
+    supported_models: ["mobilenet", "vgg"]
+    min_os_version: "iOS 13.0"
+    optimizations:
+      neural_engine: true
+      gpu_acceleration: true
+      cpu_fallback: true
+
+  android:
+    format: "tflite"
+    framework: "TensorFlow Lite"
+    supported_models: ["mobilenet", "vgg"]
+    min_api_level: 21
+    optimizations:
+      nnapi_acceleration: true
+      gpu_acceleration: true
+      cpu_fallback: true
+
+  windows:
+    format: "onnx"
+    framework: "ONNX Runtime"
+    supported_models: ["all"]
+    optimizations:
+      directml: true
+      cpu_optimization: true
+
+  linux:
+    format: "onnx"
+    framework: "ONNX Runtime"
+    supported_models: ["all"]
+    optimizations:
+      cuda_optimization: true
+      cpu_optimization: true
+
+  macos:
+    format: "coreml"
+    framework: "Core ML"
+    supported_models: ["all"]
+    optimizations:
+      neural_engine: true
+      metal_acceleration: true
+
+  web:
+    format: "onnx"
+    framework: "ONNX.js"
+    supported_models: ["mobilenet", "vgg"]
+    optimizations:
+      webgl_acceleration: true
+      wasm_optimization: true
+
+# Validation settings
+validation:
+  accuracy_threshold: 0.95  # Minimum accuracy after export
+  max_inference_time_ms: 500  # Maximum acceptable inference time
+  max_model_size_mb: 50  # Maximum model size
+  numerical_precision: 1e-5  # Numerical precision for validation
+
+  test_cases:
+    - name: "normal_chest_xray"
+      expected_class: "NORMAL"
+      confidence_threshold: 0.8
+
+    - name: "pneumonia_chest_xray"
+      expected_class: "PNEUMONIA"
+      confidence_threshold: 0.8
+
+    - name: "batch_processing"
+      batch_sizes: [1, 4, 8, 16]
+      performance_scaling: "linear"
+
+# Export automation settings
+automation:
+  auto_export_on_training: true
+  export_best_model_only: true
+  cleanup_intermediate_files: true
+  generate_documentation: true
+
+  notification:
+    email_on_completion: false
+    slack_webhook: null
+    log_level: "INFO"
+
+# Security and compliance
+security:
+  model_encryption: false
+  access_control: false
+  audit_logging: true
+  data_privacy:
+    remove_training_data_references: true
+    anonymize_model_metadata: false
+
+# Performance monitoring
+monitoring:
+  track_inference_time: true
+  track_memory_usage: true
+  track_accuracy_degradation: true
+  benchmark_against_baseline: true
+
+  alerts:
+    accuracy_drop_threshold: 1.0  # Alert if accuracy drops more than 1%
+    performance_degradation_threshold: 2.0  # Alert if inference time increases by 2x

@@ -1,0 +1,22 @@
+Knowledge Distillation Training
+================================
+
+Student: MobileNetV1 v4 (CLAHE-augmented)
+Teachers: ResNet50
+
+Best validation accuracy: 95.77%
+Best epoch: 22
+Total epochs: 29
+
+Hyperparameters:
+  CLAHE probability: 0.4
+  Temperature: 3.0
+  Alpha (hard/soft): 0.5/0.5
+  Learning rate: 5e-05
+  Batch size: 128
+
+V4 Baseline Performance:
+  Accuracy: 96.10%
+  Sensitivity: 99.20%
+  False Negatives: 4
+  False Positives: 35

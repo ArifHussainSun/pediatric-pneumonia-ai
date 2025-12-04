@@ -1,0 +1,73 @@
+{
+  "preprocessing": {
+    "enabled": true,
+    "quality_assessment": {
+      "brightness_thresholds": {
+        "too_dark": 30,
+        "dark": 60,
+        "bright": 160,
+        "too_bright": 200
+      },
+      "contrast_thresholds": {
+        "very_low": 15,
+        "low": 30,
+        "high": 80
+      },
+      "dynamic_range_threshold": 50
+    },
+    "clahe_enhancement": {
+      "enabled": true,
+      "clip_limit": 4.0,
+      "tile_grid_size": [
+        12,
+        12
+      ],
+      "apply_for_poor_quality": true
+    },
+    "gamma_correction": {
+      "enabled": false,
+      "default_gamma": 1.2,
+      "auto_calculate": true
+    },
+    "intensity_normalization": {
+      "enabled": true,
+      "target_mean": 127.0,
+      "target_std": 50.0
+    },
+    "aggressive_enhancement": {
+      "enabled": false,
+      "clip_limit": 3.0,
+      "tile_grid_size": [
+        6,
+        6
+      ],
+      "gamma_range": [
+        0.7,
+        1.5
+      ]
+    }
+  },
+  "platforms": {
+    "api_server": {
+      "log_quality_warnings": true,
+      "enhancement_log_level": "info"
+    },
+    "windows": {
+      "cache_enhanced_images": false,
+      "show_quality_warnings": true
+    },
+    "android": {
+      "use_basic_enhancement": true,
+      "log_quality_metrics": true
+    },
+    "web": {
+      "client_side_preview": false,
+      "show_quality_indicators": true
+    }
+  },
+  "model_integration": {
+    "apply_before_transforms": true,
+    "skip_for_high_quality": true,
+    "confidence_boost_threshold": 0.1
+  }
+}

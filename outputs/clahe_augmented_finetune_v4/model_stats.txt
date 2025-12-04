@@ -1,0 +1,8 @@
+Model: clahe_augmented_finetune_v4
+Date: Mon 24 Nov 2025 09:05:16 AM EST
+Validation Accuracy: 97.01%
+Test Accuracy: 96.10%
+Sensitivity: 99.20%
+Specificity: 93.00%
+False Negatives: 4 (baseline: 21)
+False Positives: 35 (baseline: 3)

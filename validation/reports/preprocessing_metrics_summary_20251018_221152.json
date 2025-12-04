@@ -1,0 +1,44 @@
+{
+  "test_timestamp": "20251018_221152",
+  "total_images_tested": 500,
+  "baseline_metrics": {
+    "name": "Baseline (No Preprocessing)",
+    "accuracy": 0.986,
+    "sensitivity": 0.976,
+    "specificity": 0.996,
+    "precision": 0.9959183673469387,
+    "f1_score": 0.9858585858585859,
+    "false_positives": 1,
+    "false_negatives": 6,
+    "true_positives": 244,
+    "true_negatives": 249,
+    "avg_confidence": 0.9655408396720886,
+    "pneumonia_confidence": 0.9486900696754456,
+    "normal_confidence": 0.9823916096687317,
+    "total_samples": 500
+  },
+  "preprocessing_metrics": {
+    "name": "Intelligent Preprocessing + CLAHE",
+    "accuracy": 0.986,
+    "sensitivity": 0.976,
+    "specificity": 0.996,
+    "precision": 0.9959183673469387,
+    "f1_score": 0.9858585858585859,
+    "false_positives": 1,
+    "false_negatives": 6,
+    "true_positives": 244,
+    "true_negatives": 249,
+    "avg_confidence": 0.9655408396720886,
+    "pneumonia_confidence": 0.9486900696754456,
+    "normal_confidence": 0.9823916096687317,
+    "total_samples": 500
+  },
+  "improvements": {
+    "accuracy_improvement_pct": 0.0,
+    "sensitivity_improvement_pct": 0.0,
+    "specificity_improvement_pct": 0.0,
+    "false_positive_reduction": 0,
+    "false_negative_reduction": 0,
+    "confidence_improvement": 0.0
+  }
+}

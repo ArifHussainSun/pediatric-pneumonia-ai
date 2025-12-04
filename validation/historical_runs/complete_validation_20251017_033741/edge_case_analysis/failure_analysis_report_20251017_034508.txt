@@ -1,0 +1,37 @@
+================================================================================
+MobileNet V1 Failure Analysis Report
+================================================================================
+
+Generated: 2025-10-17 03:45:09
+Total Edge Cases: 6
+Total Test Results: 200
+Edge Case Rate: 3.0%
+
+EDGE CASE BREAKDOWN:
+----------------------------------------
+Borderline Case: 2 (33.3%)
+High Confidence Incorrect: 1 (16.7%)
+Low Confidence Correct: 3 (50.0%)
+
+SEVERITY BREAKDOWN:
+----------------------------------------
+High Severity:   1 cases
+Medium Severity: 0 cases
+Low Severity:    5 cases
+
+MOST PROBLEMATIC CASES:
+----------------------------------------
+1. person496_bacteria_2095.jpeg
+   Type: high_confidence_incorrect
+   Ground Truth: PNEUMONIA -> Predicted: NORMAL
+   Confidence: 0.839
+   Description: Incorrect prediction with high confidence (0.839)
+
+PREPROCESSING ANALYSIS:
+----------------------------------------
+Cases where preprocessing helped: 0/6 (0.0%)
+
+IMAGE QUALITY ANALYSIS:
+----------------------------------------
+Excellent: 1 cases
+

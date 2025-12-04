@@ -1,0 +1,23 @@
+================================================================================
+MobileNet V1 Failure Analysis Report
+================================================================================
+
+Generated: 2025-10-17 03:00:41
+Total Edge Cases: 1
+Total Test Results: 40
+Edge Case Rate: 2.5%
+
+EDGE CASE BREAKDOWN:
+----------------------------------------
+Low Confidence Correct: 1 (100.0%)
+
+SEVERITY BREAKDOWN:
+----------------------------------------
+High Severity:   0 cases
+Medium Severity: 0 cases
+Low Severity:    1 cases
+
+PREPROCESSING ANALYSIS:
+----------------------------------------
+Cases where preprocessing helped: 0/1 (0.0%)
+

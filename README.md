@@ -1,34 +1,44 @@
-Pediatric Pneumonia AI Detection System
-An advanced deep learning system for automated pediatric pneumonia detection from chest X-ray images, achieving 99.80% sensitivity with only 1 false negative out of 500 pneumonia cases through innovative CLAHE augmentation and knowledge distillation techniques.
+# Pediatric Pneumonia AI Detection System
 
-Project Overview
-This project tackles a critical challenge in pediatric healthcare: reducing missed pneumonia diagnoses in chest X-rays, particularly for blurry or low-quality images common in resource-constrained settings.
+An advanced deep learning system for automated pediatric pneumonia detection from chest X-ray images, achieving **99.80% sensitivity** with only **1 false negative** out of 500 pneumonia cases through innovative CLAHE augmentation and knowledge distillation techniques.
 
-Key Achievement: Reduced false negatives from 21 → 1 (95% reduction) while maintaining high accuracy, making the system ideal for high-sensitivity screening in underserved regions.
+## Project Overview
 
-Performance Summary
+This project tackles a critical challenge in pediatric healthcare: **reducing missed pneumonia diagnoses** in chest X-rays, particularly for blurry or low-quality images common in resource-constrained settings.
+
+**Key Achievement:** Reduced false negatives from **21 → 1** (95% reduction) while maintaining high accuracy, making the system ideal for high-sensitivity screening in underserved regions.
+
+## Performance Summary
+
 Tested on 1,000-image stratified test set (500 normal + 500 pneumonia cases):
 
-Model Variant	Accuracy	Sensitivity	Specificity	False Negatives	False Positives	F1-Score	Status
-MobileNet-Base
-(Baseline)	97.60%	95.80%	99.40%	21	3	~96.5%	Benchmark
-MobileNet-CLAHE
-(V4, Production)	96.10%	99.20%	93.00%	4	35	96.22%	Production
-MobileNet-KD
-(V5, Best)	95.70%	99.80%	91.60%	1	42	95.87%	Best
-Clinical Impact
-99.80% Sensitivity: Catches 499 out of 500 pneumonia cases
-Only 1 Missed Case: Down from 21 in baseline model
-F1-Score: 95.87% - excellent balance of precision and recall
-Ideal for Screening: High sensitivity prioritized for underserved regions
-Quick Start
-Prerequisites
+| Model Variant | Accuracy | Sensitivity | Specificity | False Negatives | False Positives | F1-Score | Status |
+|---------------|----------|-------------|-------------|-----------------|-----------------|----------|--------|
+| **MobileNet-Base**<br>*(Baseline)* | 97.60% | 95.80% | 99.40% | 21 | 3 | ~96.5% | Benchmark |
+| **MobileNet-CLAHE**<br>*(V4, Production)* | 96.10% | 99.20% | 93.00% | **4** | 35 | 96.22% | Production |
+| **MobileNet-KD**<br>*(V5, Best)* | 95.70% | **99.80%** | 91.60% | **1** | 42 | 95.87% | **Best** |
+
+### Clinical Impact
+- **99.80% Sensitivity**: Catches 499 out of 500 pneumonia cases
+- **Only 1 Missed Case**: Down from 21 in baseline model
+- **F1-Score**: 95.87% - excellent balance of precision and recall
+- **Ideal for Screening**: High sensitivity prioritized for underserved regions
+
+## Quick Start
+
+### Prerequisites
+
+```bash
 # System Requirements
 - Python 3.10+
 - PyTorch 2.8.0+ with CUDA 12.8 (for GPU training)
 - 16GB+ RAM (32GB recommended for training)
 - GPU: Tesla V100 or better (for multi-GPU training)
-Installation
+```
+
+### Installation
+
+```bash
 # Clone the repository
 git clone https://github.com/iShaldam/pediatric-pneumonia-ai.git
 cd pediatric-pneumonia-ai
@@ -38,7 +48,11 @@ pip install -r requirements.txt
 
 # Verify installation
 python -c "import torch; print(f'PyTorch: {torch.__version__}, CUDA: {torch.cuda.is_available()}')"
-Test Best Model (MobileNet-KD)
+```
+
+### Test Best Model (MobileNet-KD)
+
+```bash
 # Test on 1000 images (500 normal + 500 pneumonia)
 # MobileNet-KD = V5 = Knowledge Distilled variant
 python3 validation/scripts/test_1000_images_conservative.py \
@@ -47,7 +61,11 @@ python3 validation/scripts/test_1000_images_conservative.py \
     --no-preprocessing
 
 # Expected output: 95.70% accuracy, 99.80% sensitivity, 1 FN
-Test Production Model (MobileNet-CLAHE)
+```
+
+### Test Production Model (MobileNet-CLAHE)
+
+```bash
 # More balanced performance (fewer false positives)
 # MobileNet-CLAHE = V4 = CLAHE-augmented variant
 python3 validation/scripts/test_1000_images_conservative.py \
@@ -56,7 +74,11 @@ python3 validation/scripts/test_1000_images_conservative.py \
     --no-preprocessing
 
 # Expected output: 96.10% accuracy, 99.20% sensitivity, 4 FN
-Run Inference on a Single Image
+```
+
+### Run Inference on a Single Image
+
+```python
 # Python script to test on your own chest X-ray image
 import torch
 from PIL import Image
@@ -93,13 +115,23 @@ with torch.no_grad():
     print(f"Prediction: {result}")
     print(f"Confidence: {confidence:.2%}")
     print(f"NORMAL: {normal_prob:.2%}, PNEUMONIA: {pneumonia_prob:.2%}")
-Architecture & Approach
-The Problem
-Challenge Identified: - Baseline model had 21 false negatives (missed pneumonia cases) - 62% of false negatives were blurry/low-detail images - Post-hoc preprocessing created distribution mismatch issues - Traditional augmentation didn't address image quality variation
+```
 
-The Solution: CLAHE Augmentation Training
-Key Innovation: Train models with CLAHE (Contrast Limited Adaptive Histogram Equalization) augmentation to make them robust to varying image quality.
+## Architecture & Approach
 
+### The Problem
+
+**Challenge Identified:**
+- Baseline model had **21 false negatives** (missed pneumonia cases)
+- **62%** of false negatives were blurry/low-detail images
+- Post-hoc preprocessing created distribution mismatch issues
+- Traditional augmentation didn't address image quality variation
+
+### The Solution: CLAHE Augmentation Training
+
+**Key Innovation:** Train models with CLAHE (Contrast Limited Adaptive Histogram Equalization) augmentation to make them robust to varying image quality.
+
+```
 Training Pipeline:
 Raw Image → CLAHE (40% probability) → Standard Augmentation → Model
            ↓
@@ -107,8 +139,13 @@ Raw Image → CLAHE (40% probability) → Standard Augmentation → Model
   Grid Size: 8×8
 
 Result: Model learns to handle both high-quality and enhanced images
-Model Architecture
-Primary Model: MobileNetV1 (Optimized for Deployment)
+```
+
+### Model Architecture
+
+#### Primary Model: MobileNetV1 (Optimized for Deployment)
+
+```
 Architecture:
 Input (224×224×3)
     ↓
@@ -123,9 +160,17 @@ Classifier:
   - Linear (64 → 2)
     ↓
 Softmax → [NORMAL, PNEUMONIA]
-Why MobileNetV1? - Lightweight: 4.2M parameters vs 25.6M (ResNet50) - Fast inference: <100ms on CPU - Mobile-ready: Runs on smartphones and edge devices - Excellent accuracy: 96%+ with proper training
+```
 
-Knowledge Distillation: ResNet50 Teacher → MobileNetV1 Student
+**Why MobileNetV1?**
+- Lightweight: 4.2M parameters vs 25.6M (ResNet50)
+- Fast inference: <100ms on CPU
+- Mobile-ready: Runs on smartphones and edge devices
+- Excellent accuracy: 96%+ with proper training
+
+#### Knowledge Distillation: ResNet50 Teacher → MobileNetV1 Student
+
+```
 Knowledge Distillation Pipeline:
 
 Teacher (ResNet50)  ────┐
@@ -134,20 +179,27 @@ Student (MobileNetV1)  ─┘         ↓
          ↓                  Combined Loss
     Hard Labels          α×Hard + (1-α)×Soft
     (Ground Truth)         (α = 0.5)
-Result: MobileNet-KD (student model) achieves 99.80% sensitivity with only 1 FN
+```
 
-Model Nomenclature
+**Result:** MobileNet-KD (student model) achieves 99.80% sensitivity with only 1 FN
+
+### Model Nomenclature
+
 To maintain clarity across documentation and submissions, our three MobileNetV1 variants use consistent naming:
 
-Variant Name	Alternative Names	Description
-MobileNet-Base	Baseline, Baseline MobileNetV1	Original model trained with standard augmentation only (horizontal flip, rotation ±5°, color jitter). Serves as performance benchmark.
-MobileNet-CLAHE	V4, CLAHE-augmented, Production Model	Enhanced model trained on 40% CLAHE-preprocessed + 60% standard augmented images. Best balance of sensitivity and specificity.
-MobileNet-KD	V5, Knowledge Distilled, Best Model	Most advanced variant with same data composition as MobileNet-CLAHE, incorporating knowledge distillation from ResNet50 teacher. Achieves highest sensitivity (99.80%) with only 1 false negative.
-Key Distinction: All three variants share the same MobileNetV1 base architecture (4.2M parameters) and are trained on the Kermany pediatric chest X-ray dataset. Progressive improvements stem from: (1) enhanced preprocessing (CLAHE), and (2) advanced training methodology (knowledge distillation).
+| Variant Name | Alternative Names | Description |
+|--------------|-------------------|-------------|
+| **MobileNet-Base** | Baseline, Baseline MobileNetV1 | Original model trained with standard augmentation only (horizontal flip, rotation ±5°, color jitter). Serves as performance benchmark. |
+| **MobileNet-CLAHE** | V4, CLAHE-augmented, Production Model | Enhanced model trained on 40% CLAHE-preprocessed + 60% standard augmented images. Best balance of sensitivity and specificity. |
+| **MobileNet-KD** | V5, Knowledge Distilled, Best Model | Most advanced variant with same data composition as MobileNet-CLAHE, incorporating knowledge distillation from ResNet50 teacher. Achieves highest sensitivity (99.80%) with only 1 false negative. |
 
-Intelligent Preprocessing Pipeline
+**Key Distinction:** All three variants share the same MobileNetV1 base architecture (4.2M parameters) and are trained on the Kermany pediatric chest X-ray dataset. Progressive improvements stem from: (1) enhanced preprocessing (CLAHE), and (2) advanced training methodology (knowledge distillation).
+
+### Intelligent Preprocessing Pipeline
+
 Our production API employs an intelligent quality assessment system that selectively enhances images based on quality metrics:
 
+```
 Inference Pipeline:
 User Upload → Quality Assessment → Enhancement Decision → Model Inference
                      ↓                      ↓
@@ -160,11 +212,23 @@ User Upload → Quality Assessment → Enhancement Decision → Model Inference
             • Positioning          Else: Use original
             • Artifacts                    ↓
                                    Resize 224×224 → Normalize → Inference
-Quality Assessment Process: 1. Seven-Metric Analysis: Each uploaded X-ray is evaluated across brightness, contrast, sharpness, edge density, noise level, anatomical positioning, and artifact detection 2. Threshold Decision (Score ≥ 0.65): High-quality images bypass enhancement to preserve diagnostic fidelity 3. Selective Enhancement (Score < 0.65): Low-quality images undergo multi-stage enhancement: - CLAHE: Adaptive contrast enhancement with clip limit 1.5-3.0, grid size 8×8 - ROI Extraction: Focus on lung fields, eliminating non-diagnostic regions - Autoencoder Refinement: Pattern enhancement and feature extraction - Denoising: Artifact reduction and noise filtering 4. Conservative Philosophy: Only enhance when necessary; preserve original quality when possible
+```
+
+**Quality Assessment Process:**
+1. **Seven-Metric Analysis**: Each uploaded X-ray is evaluated across brightness, contrast, sharpness, edge density, noise level, anatomical positioning, and artifact detection
+2. **Threshold Decision** (Score ≥ 0.65): High-quality images bypass enhancement to preserve diagnostic fidelity
+3. **Selective Enhancement** (Score < 0.65): Low-quality images undergo multi-stage enhancement:
+   - **CLAHE**: Adaptive contrast enhancement with clip limit 1.5-3.0, grid size 8×8
+   - **ROI Extraction**: Focus on lung fields, eliminating non-diagnostic regions
+   - **Autoencoder Refinement**: Pattern enhancement and feature extraction
+   - **Denoising**: Artifact reduction and noise filtering
+4. **Conservative Philosophy**: Only enhance when necessary; preserve original quality when possible
 
 This intelligent pipeline ensures robust performance across varying image quality conditions while maintaining high diagnostic accuracy for excellent source images.
 
-Project Structure
+## Project Structure
+
+```
 pediatric-pneumonia-ai/
 ├── src/                          # Core source code (15,922 lines)
 │   ├── models/                   # Model architectures
@@ -236,12 +300,19 @@ pediatric-pneumonia-ai/
 ├── HANDOFF_SUMMARY.md           # Complete project documentation
 ├── DEPLOYMENT.md                # Deployment guides
 └── README.md                    # This file
-Experimental Journey
-Phase 1: Baseline Model
-Model: MobileNetV1 (ImageNet pretrained) Result: 97.60% accuracy, 21 false negatives Issue: High false negatives, especially on blurry images
+```
 
-Phase 2: CLAHE Experiments
-Experiment 1: Fine-tune v1
+## Experimental Journey
+
+### Phase 1: Baseline Model
+**Model:** MobileNetV1 (ImageNet pretrained)
+**Result:** 97.60% accuracy, **21 false negatives**
+**Issue:** High false negatives, especially on blurry images
+
+### Phase 2: CLAHE Experiments
+
+#### Experiment 1: Fine-tune v1
+```yaml
 Config:
   CLAHE probability: 50%
   Learning rate: 0.0001
@@ -252,7 +323,10 @@ Result: FAILED
   - Model trained on CLAHE but tested with additional preprocessing
 
 Learning: CLAHE models must be tested on raw images
-Experiment 2: Fine-tune v2
+```
+
+#### Experiment 2: Fine-tune v2
+```yaml
 Config:
   CLAHE probability: 30%
   Learning rate: 0.00005
@@ -263,7 +337,10 @@ Result: UNSTABLE
   - Overfitting issues
 
 Learning: Small batch size + low CLAHE probability = unstable training
-Experiment 3: Train from Scratch v2
+```
+
+#### Experiment 3: Train from Scratch v2
+```yaml
 Config:
   CLAHE probability: 50%
   Learning rate: 0.001
@@ -275,7 +352,10 @@ Result: GOOD
   - 3 false negatives, 38 false positives
 
 Learning: Larger batch size (128) dramatically improved stability
-Experiment 4: Fine-tune v4 BEST
+```
+
+#### Experiment 4: Fine-tune v4 BEST
+```yaml
 Config:
   CLAHE probability: 40%  # Sweet spot
   Learning rate: 0.0002
@@ -293,7 +373,10 @@ Result: PRODUCTION MODEL
 
 Status: Approved for deployment
 Location: outputs/clahe_augmented_finetune_v4/best_model.pth
-Experiment 5: Over-regularized v5
+```
+
+#### Experiment 5: Over-regularized v5
+```yaml
 Config:
   CLAHE probability: 25%
   Learning rate: 0.00008
@@ -307,8 +390,12 @@ Result: CATASTROPHIC FAILURE
   - 213 false negatives
 
 Learning: Over-regularization destroyed model capacity
-Phase 3: Knowledge Distillation
-V5: ResNet50 Teacher → MobileNetV1 Student
+```
+
+### Phase 3: Knowledge Distillation
+
+#### V5: ResNet50 Teacher → MobileNetV1 Student 
+```yaml
 Config:
   Student: MobileNetV1 v4 (CLAHE-augmented)
   Teacher: ResNet50 (ImageNet pretrained)
@@ -337,44 +424,56 @@ Successfully Identified (previously missed by v4):
   person485_bacteria_2049.jpeg
   person1481_virus_2567.jpeg
   person1676_virus_2892.jpeg
-Key Technical Findings
-1. Distribution Mismatch
-Finding: CLAHE-augmented models fail catastrophically (50% accuracy) when tested with additional preprocessing.
+```
 
-Solution: Test CLAHE models on raw images using --no-preprocessing flag.
+## Key Technical Findings
 
-Exception: V4 model is robust to both preprocessed and raw images (96.10% in both cases).
+### 1. **Distribution Mismatch**
+**Finding:** CLAHE-augmented models fail catastrophically (50% accuracy) when tested with additional preprocessing.
 
-2. Batch Size Impact
-Finding: Increasing batch size from 64 → 128 dramatically improved training stability.
+**Solution:** Test CLAHE models on raw images using `--no-preprocessing` flag.
 
-Why: More diverse samples per gradient update = smoother convergence, less overfitting.
+**Exception:** V4 model is robust to both preprocessed and raw images (96.10% in both cases).
 
-3. Over-Regularization Risk
-Finding: Excessive regularization (high dropout + weight decay + class weighting) destroyed model capacity.
+### 2. **Batch Size Impact**
+**Finding:** Increasing batch size from 64 → 128 dramatically improved training stability.
 
-Example: V5 regularized with 68.70% accuracy, 213 FN (catastrophic failure).
+**Why:** More diverse samples per gradient update = smoother convergence, less overfitting.
 
-Lesson: Balance is critical - not all regularization is good regularization.
+### 3. **Over-Regularization Risk**
+**Finding:** Excessive regularization (high dropout + weight decay + class weighting) destroyed model capacity.
 
-4. CLAHE Probability Sweet Spot
-Optimal: 40% CLAHE probability
+**Example:** V5 regularized with 68.70% accuracy, 213 FN (catastrophic failure).
 
-Probability	Result
-50%	Overfitting to augmented distribution
-40%	Best balance
-30%	Insufficient robustness
-25%	Too few augmented samples
-5. Sensitivity-Specificity Trade-off
-Finding: CLAHE models achieve ~99% sensitivity but ~7% lower specificity than baseline.
+**Lesson:** Balance is critical - not all regularization is good regularization.
 
-Why: Model becomes more cautious about pneumonia detection.
+### 4. **CLAHE Probability Sweet Spot**
+**Optimal:** 40% CLAHE probability
 
-Trade-off Analysis: - Fewer missed cases (critical for screening) - More false alarms (manageable with radiologist review) - Conclusion: Acceptable for high-sensitivity screening applications
+| Probability | Result |
+|-------------|--------|
+| 50% | Overfitting to augmented distribution |
+| 40% | **Best balance** |
+| 30% | Insufficient robustness |
+| 25% | Too few augmented samples |
 
-Usage Guide
-1. Training a Model
-Train with CLAHE Augmentation (Recommended)
+### 5. **Sensitivity-Specificity Trade-off**
+**Finding:** CLAHE models achieve ~99% sensitivity but ~7% lower specificity than baseline.
+
+**Why:** Model becomes more cautious about pneumonia detection.
+
+**Trade-off Analysis:**
+- Fewer missed cases (critical for screening)
+- More false alarms (manageable with radiologist review)
+- **Conclusion:** Acceptable for high-sensitivity screening applications
+
+## Usage Guide
+
+### 1. Training a Model
+
+#### Train with CLAHE Augmentation (Recommended)
+
+```bash
 # Fine-tune from baseline (faster, recommended)
 python3 scripts/retrain_with_clahe_augmentation.py \
     --mode finetune \
@@ -397,7 +496,11 @@ python3 scripts/retrain_with_clahe_augmentation.py \
     --batch_size 128 \
     --learning_rate 0.001 \
     --clahe_prob 0.4
-Knowledge Distillation Training
+```
+
+#### Knowledge Distillation Training
+
+```bash
 # Train with ResNet50 teacher
 python3 scripts/train_mobilenet_with_distillation.py \
     --use_resnet_teacher \
@@ -409,7 +512,11 @@ python3 scripts/train_mobilenet_with_distillation.py \
     --learning_rate 0.00005 \
     --temperature 3.0 \
     --alpha 0.5
-ResNet50 Standalone (Benchmark)
+```
+
+#### ResNet50 Standalone (Benchmark)
+
+```bash
 # Train ResNet50 for comparison
 python3 scripts/train_resnet50_standalone.py \
     --data_dir ~/pediatric-pneumonia-ai/data \
@@ -417,15 +524,28 @@ python3 scripts/train_resnet50_standalone.py \
     --epochs 30 \
     --batch_size 64 \
     --clahe_prob 0.4
-2. Multi-GPU Training (DGX Station)
+```
+
+### 2. Multi-GPU Training (DGX Station)
+
+```bash
 # Launch distributed training on 4 GPUs
 # Edit configs/dgx_station_config.yaml first
 
 ./scripts/launch_dgx_training.sh configs/dgx_station_config.yaml 4
-DGX Configuration: - Hardware: 4× Tesla V100 (32GB each) - Batch size: 48 per GPU (192 effective) - Workers: 6 per GPU - Optimizations: AMP, NVLink, persistent workers
+```
 
-3. Validation & Testing
-Test on 1000 Images
+**DGX Configuration:**
+- Hardware: 4× Tesla V100 (32GB each)
+- Batch size: 48 per GPU (192 effective)
+- Workers: 6 per GPU
+- Optimizations: AMP, NVLink, persistent workers
+
+### 3. Validation & Testing
+
+#### Test on 1000 Images
+
+```bash
 # Test CLAHE models (use --no-preprocessing)
 python3 validation/scripts/test_1000_images_conservative.py \
     --model_path outputs/clahe_augmented_finetune_v4/best_model.pth \
@@ -443,7 +563,11 @@ python3 validation/scripts/test_1000_images_conservative.py \
     --data_dir ~/pediatric-pneumonia-ai/data/test \
     --no-preprocessing \
     --model_type resnet50
-Comprehensive Evaluation
+```
+
+#### Comprehensive Evaluation
+
+```bash
 # Full metrics with ROC, PR curves
 python3 validation/scripts/comprehensive_model_evaluation.py \
     --model_path outputs/mobilenet_v5_distilled_resnet50/best_model.pth \
@@ -460,27 +584,45 @@ python3 validation/scripts/threshold_adjusted_evaluation.py \
     --model_path outputs/mobilenet_v5_distilled_resnet50/best_model.pth \
     --data_dir ~/pediatric-pneumonia-ai/data/test \
     --optimize_for sensitivity  # or 'accuracy', 'f1'
-4. Model Export & Deployment
-Export for Mobile (Android)
+```
+
+### 4. Model Export & Deployment
+
+#### Export for Mobile (Android)
+
+```bash
 # Export to TFLite with quantization
 python3 scripts/export_android.py \
     --model_path outputs/mobilenet_v5_distilled_resnet50/best_model.pth \
     --output_dir android/app/src/main/assets/ \
     --quantize int8  # or 'float16', 'dynamic'
-Export for Windows
+```
+
+#### Export for Windows
+
+```bash
 # Export to ONNX
 python3 scripts/export_windows.py \
     --model_path outputs/clahe_augmented_finetune_v4/best_model.pth \
     --output_dir windows/models/ \
     --optimize
-Multi-Format Export
+```
+
+#### Multi-Format Export
+
+```bash
 # Export to multiple formats (ONNX, TorchScript, TFLite)
 python3 examples/export_for_deployment.py \
     --model_path outputs/mobilenet_v5_distilled_resnet50/best_model.pth \
     --formats onnx torchscript tflite \
     --output_dir deployment/models/
-Dataset Information
-Dataset Structure
+```
+
+## Dataset Information
+
+### Dataset Structure
+
+```
 data/
 ├── train/                   # Training set (6,826 images)
 │   ├── NORMAL/             # 3,413 normal chest X-rays
@@ -488,13 +630,19 @@ data/
 └── test/                    # Test set (1,704 images)
     ├── NORMAL/             # 852 normal chest X-rays
     └── PNEUMONIA/          # 852 pneumonia chest X-rays
-Dataset Characteristics
-Balance: Perfectly balanced (50% normal, 50% pneumonia)
-Format: JPEG chest X-ray images
-Patient Population: Pediatric (children)
-Image Quality: Varies (some blurry/low-quality)
-Source: Publicly available pediatric pneumonia dataset
-Data Augmentation (Medical-Safe)
+```
+
+### Dataset Characteristics
+
+- **Balance:** Perfectly balanced (50% normal, 50% pneumonia)
+- **Format:** JPEG chest X-ray images
+- **Patient Population:** Pediatric (children)
+- **Image Quality:** Varies (some blurry/low-quality)
+- **Source:** Publicly available pediatric pneumonia dataset
+
+### Data Augmentation (Medical-Safe)
+
+```python
 Training Augmentations:
 ├── CLAHE Enhancement (40% probability)
 │   ├── Clip limit: random(1.5, 3.0)
@@ -512,56 +660,85 @@ Validation/Test:
 NOT USED (Unsafe for medical images):
 ├── Vertical Flip (changes anatomy)
 └── Large Rotations (>15°)
-Responsible AI & Guardrails
+```
+
+## Responsible AI & Guardrails
+
 Our solution prioritizes fairness, privacy, transparency, and compliance throughout the development and deployment lifecycle:
 
-Data & Training Fairness
-Balanced Dataset: Training set comprises equal representation (50% normal, 50% pneumonia) from the publicly available Kermany pediatric chest X-ray dataset to mitigate algorithmic bias
-Class Weighting: Applied 1.0 (normal) vs 1.3 (pneumonia) weighting during training to address slight class imbalance in loss calculation
-Diverse Image Quality: Dataset includes varying quality images (blurry, low-contrast, high-quality) to ensure equitable performance across real-world clinical conditions
-Stratified Validation: Test sets maintain balanced class representation for unbiased performance assessment
-Privacy & Compliance
-Public Training Data: Utilized publicly available Kermany dataset, eliminating patient privacy concerns during development
-Future Clinical Validation: Planned hospital dataset from Pakistan will be handled under strict ethical oversight:
-Sheridan Research Ethics Board (REB) approval secured
-Amendment submitted for new dataset coverage
-All patient data will be anonymized per international privacy regulations
-Compliance with institutional and international ethical standards
-No PII Storage: Inference API processes images in-memory without persistent storage of patient-identifiable information
-Transparency & Interpretability
-Model Decisions: Visualization techniques (GradCAM, activation maps) enable clinicians to understand prediction basis
-Confidence Scoring: All predictions include calibrated confidence scores (temperature scaling T=2.5) to reduce overconfidence
-User Feedback: Quality assessment results provided to clinicians, including enhancement decisions and image quality metrics
-Open Methodology: Complete training pipeline, hyperparameters, and architecture details documented for reproducibility
-Continuous Monitoring & Accountability
-Performance Tracking: Continuous monitoring of precision, recall, F1-score across deployments
-Subgroup Analysis: Attention to performance disparities across demographic subgroups (when data available)
-Clinical Oversight: System designed as decision support tool requiring radiologist review, not autonomous diagnosis
-Error Analysis: Comprehensive false negative/positive analysis to identify failure modes and improvement opportunities
-Clinical Safety Principles
-High Sensitivity Priority: System optimized for 99.80% sensitivity to minimize missed pneumonia diagnoses (only 1 false negative)
-Acceptable False Positive Rate: 42 false positives (8.4%) manageable through radiologist review workflows
-Risk-Benefit Balance: Missing pneumonia cases (clinical harm) weighted more heavily than false alarms (additional review)
-Point-of-Care Screening: Intended for initial screening in underserved regions, not replacement for expert radiologist review
+### Data & Training Fairness
+- **Balanced Dataset**: Training set comprises equal representation (50% normal, 50% pneumonia) from the publicly available Kermany pediatric chest X-ray dataset to mitigate algorithmic bias
+- **Class Weighting**: Applied 1.0 (normal) vs 1.3 (pneumonia) weighting during training to address slight class imbalance in loss calculation
+- **Diverse Image Quality**: Dataset includes varying quality images (blurry, low-contrast, high-quality) to ensure equitable performance across real-world clinical conditions
+- **Stratified Validation**: Test sets maintain balanced class representation for unbiased performance assessment
+
+### Privacy & Compliance
+- **Public Training Data**: Utilized publicly available Kermany dataset, eliminating patient privacy concerns during development
+- **Future Clinical Validation**: Planned hospital dataset from Pakistan will be handled under strict ethical oversight:
+  - Sheridan Research Ethics Board (REB) approval secured
+  - Amendment submitted for new dataset coverage
+  - All patient data will be anonymized per international privacy regulations
+  - Compliance with institutional and international ethical standards
+- **No PII Storage**: Inference API processes images in-memory without persistent storage of patient-identifiable information
+
+### Transparency & Interpretability
+- **Model Decisions**: Visualization techniques (GradCAM, activation maps) enable clinicians to understand prediction basis
+- **Confidence Scoring**: All predictions include calibrated confidence scores (temperature scaling T=2.5) to reduce overconfidence
+- **User Feedback**: Quality assessment results provided to clinicians, including enhancement decisions and image quality metrics
+- **Open Methodology**: Complete training pipeline, hyperparameters, and architecture details documented for reproducibility
+
+### Continuous Monitoring & Accountability
+- **Performance Tracking**: Continuous monitoring of precision, recall, F1-score across deployments
+- **Subgroup Analysis**: Attention to performance disparities across demographic subgroups (when data available)
+- **Clinical Oversight**: System designed as decision support tool requiring radiologist review, not autonomous diagnosis
+- **Error Analysis**: Comprehensive false negative/positive analysis to identify failure modes and improvement opportunities
+
+### Clinical Safety Principles
+- **High Sensitivity Priority**: System optimized for 99.80% sensitivity to minimize missed pneumonia diagnoses (only 1 false negative)
+- **Acceptable False Positive Rate**: 42 false positives (8.4%) manageable through radiologist review workflows
+- **Risk-Benefit Balance**: Missing pneumonia cases (clinical harm) weighted more heavily than false alarms (additional review)
+- **Point-of-Care Screening**: Intended for initial screening in underserved regions, not replacement for expert radiologist review
+
 These measures collectively uphold principles of fairness, transparency, accountability, and beneficence, aligning with global frameworks for responsible AI deployment in healthcare.
 
-Deployment Options
-1. Web Application (FastAPI + Frontend)
+## Deployment Options
+
+### 1. Web Application (FastAPI + Frontend)
+
 Run the complete web application with FastAPI backend and interactive web interface:
 
+```bash
 # Terminal 1: Start FastAPI backend server
 uvicorn src.api.server:app --host 0.0.0.0 --port 8000 --reload
 
 # Terminal 2: Serve web frontend (in a new terminal)
 cd web
 python3 -m http.server 3000
-Access the Application: 1. Open browser to: http://localhost:3000 2. Upload a chest X-ray image via drag-and-drop or file picker 3. View real-time prediction results with confidence scores 4. Check API health status in the interface
+```
 
-API Endpoints Available: - GET /health - Server health check - POST /predict - Single image prediction - POST /predict/batch - Batch prediction (up to 10 images) - GET /models - List available models
+**Access the Application:**
+1. Open browser to: `http://localhost:3000`
+2. Upload a chest X-ray image via drag-and-drop or file picker
+3. View real-time prediction results with confidence scores
+4. Check API health status in the interface
 
-Features: - Drag-and-drop image upload - Real-time inference visualization - Confidence scoring with NORMAL/PNEUMONIA probabilities - Image quality assessment and feedback - Processing time metrics - Responsive dark-themed UI
+**API Endpoints Available:**
+- `GET /health` - Server health check
+- `POST /predict` - Single image prediction
+- `POST /predict/batch` - Batch prediction (up to 10 images)
+- `GET /models` - List available models
 
-2. Python API (REST)
+**Features:**
+- Drag-and-drop image upload
+- Real-time inference visualization
+- Confidence scoring with NORMAL/PNEUMONIA probabilities
+- Image quality assessment and feedback
+- Processing time metrics
+- Responsive dark-themed UI
+
+### 2. Python API (REST)
+
+```bash
 # Start inference server (alternative to FastAPI server above)
 python3 -m src.api.inference --port 8080 \
     --model_path outputs/mobilenet_v5_distilled_resnet50/best_model.pth
@@ -570,22 +747,42 @@ python3 -m src.api.inference --port 8080 \
 curl -X POST http://localhost:8080/predict \
     -F "file=@chest_xray.jpg" \
     -F "return_confidence=true"
-3. Android App
+```
+
+### 3. Android App
+
+```bash
 cd android
 ./gradlew assembleRelease
 
 # APK: android/app/build/outputs/apk/release/app-release.apk
-Features: - Real-time inference (<200ms on modern phones) - Image quality assessment - Confidence scoring - Offline operation
+```
 
-4. Windows Desktop App
+**Features:**
+- Real-time inference (<200ms on modern phones)
+- Image quality assessment
+- Confidence scoring
+- Offline operation
+
+### 4. Windows Desktop App
+
+```bash
 cd windows
 python pneumonia_app.py
 
 # Or build standalone executable:
 pyinstaller --onefile --windowed pneumonia_app.py
-Features: - PyQt5 GUI - Batch processing - Image preprocessing controls - Result export (PDF, CSV)
+```
 
-5. Docker Deployment
+**Features:**
+- PyQt5 GUI
+- Batch processing
+- Image preprocessing controls
+- Result export (PDF, CSV)
+
+### 5. Docker Deployment
+
+```bash
 # Build container
 docker build -t pneumonia-detection:latest .
 
@@ -597,10 +794,15 @@ docker run -d -p 8080:8080 \
 
 # Health check
 curl http://localhost:8080/health
-6. Integration with Existing Healthcare Systems
+```
+
+### 6. Integration with Existing Healthcare Systems
+
 Our solution seamlessly integrates into existing healthcare workflows through a multi-stage pipeline designed for both point-of-care and backend analysis:
 
-Edge-Cloud Hybrid Architecture
+#### Edge-Cloud Hybrid Architecture
+
+```
 Clinical Workflow Integration:
 
 Point-of-Care (Edge):                 Backend Infrastructure (Cloud):
@@ -613,22 +815,45 @@ Point-of-Care (Edge):                 Backend Infrastructure (Cloud):
          ↓                                       ↑
     Immediate Screening              Periodic Model Updates
     (99.80% sensitivity)              & Performance Monitoring
-Dual-Model Strategy: - Edge Deployment: Lightweight MobileNetV1 (student model) for real-time screening on resource-constrained devices (mobile X-ray units, rural clinics) - Backend Analysis: Powerful ResNet50 (teacher model) on cloud infrastructure for comprehensive analysis and continuous model improvement - Knowledge Transfer: Backend insights fed back to edge models through periodic updates
+```
 
-Healthcare System Touchpoints
+**Dual-Model Strategy:**
+- **Edge Deployment**: Lightweight MobileNetV1 (student model) for real-time screening on resource-constrained devices (mobile X-ray units, rural clinics)
+- **Backend Analysis**: Powerful ResNet50 (teacher model) on cloud infrastructure for comprehensive analysis and continuous model improvement
+- **Knowledge Transfer**: Backend insights fed back to edge models through periodic updates
+
+#### Healthcare System Touchpoints
+
 Our system provides four key integration points for seamless workflow adoption:
 
-DICOM Image Ingestion - Direct integration with existing radiology PACS (Picture Archiving and Communication Systems) - Supports standard DICOM format for chest X-ray images - Automatic metadata extraction (patient ID, acquisition parameters)
+1. **DICOM Image Ingestion**
+   - Direct integration with existing radiology PACS (Picture Archiving and Communication Systems)
+   - Supports standard DICOM format for chest X-ray images
+   - Automatic metadata extraction (patient ID, acquisition parameters)
 
-RESTful API Endpoints - /predict - Single image pneumonia detection - /predict/batch - Batch processing (up to 10 images) - /health - System status monitoring - /models - Available model versions - Standard HTTP/HTTPS protocols for universal compatibility
+2. **RESTful API Endpoints**
+   - `/predict` - Single image pneumonia detection
+   - `/predict/batch` - Batch processing (up to 10 images)
+   - `/health` - System status monitoring
+   - `/models` - Available model versions
+   - Standard HTTP/HTTPS protocols for universal compatibility
 
-HL7 FHIR-Compliant Result Reporting - Structured result output following HL7 FHIR (Fast Healthcare Interoperability Resources) standards - Seamless integration with Electronic Health Record (EHR) systems - Standardized diagnosis codes and confidence scores - Audit trail for clinical decision support
+3. **HL7 FHIR-Compliant Result Reporting**
+   - Structured result output following HL7 FHIR (Fast Healthcare Interoperability Resources) standards
+   - Seamless integration with Electronic Health Record (EHR) systems
+   - Standardized diagnosis codes and confidence scores
+   - Audit trail for clinical decision support
 
-Clinician Dashboard Interfaces - Radiologist review queues with prioritization based on confidence scores - Side-by-side comparison of original and enhanced images - GradCAM visualization overlays for interpretability - Batch result management and export capabilities
+4. **Clinician Dashboard Interfaces**
+   - Radiologist review queues with prioritization based on confidence scores
+   - Side-by-side comparison of original and enhanced images
+   - GradCAM visualization overlays for interpretability
+   - Batch result management and export capabilities
 
-Deployment Scenarios
-Scenario 1: Rural Clinic Integration
+#### Deployment Scenarios
 
+**Scenario 1: Rural Clinic Integration**
+```
 Mobile Technician → Capture X-ray → MobileNetV1 Edge Inference (offline)
                                            ↓
                                     Alert if PNEUMONIA detected
@@ -636,8 +861,10 @@ Mobile Technician → Capture X-ray → MobileNetV1 Edge Inference (offline)
                               Sync results when connectivity available
                                            ↓
                               Backend validation & EHR integration
-Scenario 2: Hospital PACS Integration
+```
 
+**Scenario 2: Hospital PACS Integration**
+```
 DICOM Server → API Gateway → Preprocessing Pipeline → Model Inference
                                                             ↓
                                                    Results → FHIR
@@ -645,10 +872,15 @@ DICOM Server → API Gateway → Preprocessing Pipeline → Model Inference
                                                EHR System Integration
                                                             ↓
                                             Radiologist Review Dashboard
+```
+
 This hybrid edge-cloud architecture balances the need for immediate diagnostic support with the computational requirements of state-of-the-art deep learning models, ensuring accessibility in resource-constrained settings while maintaining diagnostic accuracy.
 
-Model Interpretability
-GradCAM Visualization
+## Model Interpretability
+
+### GradCAM Visualization
+
+```python
 from src.visualization import GradCAMVisualizer
 from src.models.mobilenet import MobileNetFineTune
 import torch
@@ -670,11 +902,20 @@ result = gradcam.visualize_prediction(
 
 print(f"Prediction: {result['prediction']}")
 print(f"Confidence: {result['confidence']:.2%}")
-Attention Map Analysis
-GradCAM highlights regions the model focuses on: - Pneumonia cases: Consolidation areas, infiltrates - Normal cases: Clear lung fields - Difficult cases: Multiple small regions
+```
 
-Performance Monitoring
-TensorBoard
+### Attention Map Analysis
+
+GradCAM highlights regions the model focuses on:
+- **Pneumonia cases:** Consolidation areas, infiltrates
+- **Normal cases:** Clear lung fields
+- **Difficult cases:** Multiple small regions
+
+## Performance Monitoring
+
+### TensorBoard
+
+```bash
 # View training logs
 tensorboard --logdir outputs/clahe_augmented_finetune_v4/tensorboard/
 
@@ -683,7 +924,11 @@ tensorboard --logdir outputs/clahe_augmented_finetune_v4/tensorboard/
 # - Training/Validation Accuracy
 # - Learning Rate
 # - Gradient Norms
-Continuous Validation
+```
+
+### Continuous Validation
+
+```bash
 # Automated validation pipeline
 bash scripts/validate_model.sh outputs/mobilenet_v5_distilled_resnet50/
 
@@ -692,8 +937,13 @@ bash scripts/validate_model.sh outputs/mobilenet_v5_distilled_resnet50/
 # - ROC/PR curves
 # - False negative analysis
 # - Performance report (PDF)
-Development
-Setup Development Environment
+```
+
+## Development
+
+### Setup Development Environment
+
+```bash
 # Clone repository
 git clone https://github.com/iShaldam/pediatric-pneumonia-ai.git
 cd pediatric-pneumonia-ai
@@ -709,7 +959,11 @@ pip install -r requirements-dev.txt  # Development tools
 
 # Install pre-commit hooks (optional)
 pre-commit install
-Code Quality
+```
+
+### Code Quality
+
+```bash
 # Format code
 black src/ scripts/ validation/
 
@@ -718,7 +972,11 @@ flake8 src/ scripts/
 
 # Type checking
 mypy src/
-Running Tests
+```
+
+### Running Tests
+
+```bash
 # Run unit tests
 pytest tests/
 
@@ -727,43 +985,65 @@ pytest --cov=src tests/
 
 # Generate HTML coverage report
 pytest --cov=src --cov-report=html tests/
-Documentation
-Key Documents
-HANDOFF_SUMMARY.md - Complete project documentation with all experiments
-DEPLOYMENT.md - Deployment guides for all platforms
-validation/reports/README.md - Validation results explained
-outputs/clahe_augmented_finetune_v4/VALIDATION_SUMMARY.md - V4 model details
-configs/dgx_station_config.yaml - DGX training configuration
-API Documentation
+```
+
+## Documentation
+
+### Key Documents
+
+- **[HANDOFF_SUMMARY.md](HANDOFF_SUMMARY.md)** - Complete project documentation with all experiments
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Deployment guides for all platforms
+- **[validation/reports/README.md](validation/reports/README.md)** - Validation results explained
+- **[outputs/clahe_augmented_finetune_v4/VALIDATION_SUMMARY.md](outputs/clahe_augmented_finetune_v4/VALIDATION_SUMMARY.md)** - V4 model details
+- **[configs/dgx_station_config.yaml](configs/dgx_station_config.yaml)** - DGX training configuration
+
+### API Documentation
+
+```bash
 # Generate API docs
 cd docs/
 make html
 
 # View documentation
 open _build/html/index.html
-Contributing
+```
+
+## Contributing
+
 We welcome contributions! Please follow these guidelines:
 
-Fork the repository
-Create a feature branch (git checkout -b feature/amazing-feature)
-Commit changes using Conventional Commits - feat: for new features - fix: for bug fixes - docs: for documentation - chore: for maintenance
-Test your changes thoroughly
-Submit a pull request
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** changes using [Conventional Commits](https://www.conventionalcommits.org/)
+   - `feat:` for new features
+   - `fix:` for bug fixes
+   - `docs:` for documentation
+   - `chore:` for maintenance
+4. **Test** your changes thoroughly
+5. **Submit** a pull request
 
-Acknowledgments
-Dataset: Pediatric Chest X-Ray Images (Pneumonia) - Kaggle
-DGX System: CMI DGX Station with 4× Tesla V100 GPUs
-Framework: PyTorch 2.8.0 with CUDA 12.8
-Pretrained Models: ImageNet weights from torchvision
-Contact
-Project Maintainer: Seyon Sriskandarajah
-GitHub: iShaldam/pediatric-pneumonia-ai
-Issues: GitHub Issues
-Citation
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- **Dataset:** Pediatric Chest X-Ray Images (Pneumonia) - Kaggle
+- **DGX System:** CMI DGX Station with 4× Tesla V100 GPUs
+- **Framework:** PyTorch 2.8.0 with CUDA 12.8
+- **Pretrained Models:** ImageNet weights from torchvision
+
+## Contact
+
+- **Project Maintainer:** Seyon Sriskandarajah
+- **GitHub:** [iShaldam/pediatric-pneumonia-ai](https://github.com/iShaldam/pediatric-pneumonia-ai)
+- **Issues:** [GitHub Issues](https://github.com/iShaldam/pediatric-pneumonia-ai/issues)
+
+## Citation
+
 If you use this work in your research, please cite:
 
+```bibtex
 @software{pediatric_pneumonia_ai_2025,
   author = {Sriskandarajah, Seyon},
   title = {Pediatric Pneumonia AI Detection System with CLAHE Augmentation},
@@ -772,20 +1052,29 @@ If you use this work in your research, please cite:
   url = {https://github.com/iShaldam/pediatric-pneumonia-ai},
   note = {Achieved 99.80\% sensitivity with knowledge distillation}
 }
-Future Work
-Planned Improvements
- Test on external hospital datasets for generalization
- Multi-class classification (bacterial vs viral pneumonia)
- Integration with PACS systems
- Ensemble with v4 and v5 models
- Active learning for continuous improvement
- Federated learning for privacy-preserving training
- Explainability improvements (SHAP, LIME)
- Mobile app optimization (model compression)
-Research Directions
- Self-supervised learning on unlabeled X-rays
- Few-shot learning for rare pneumonia types
- Multi-modal learning (X-ray + clinical data)
- Uncertainty quantification
- Adversarial robustness testing
-Latest Update: December 2025 - Added ResNet50 standalone training and knowledge distillation v5 model Status: Production-ready, actively maintained Best Model: V5 (Knowledge Distilled) - 99.80% sensitivity, 1 FN
+```
+
+## Future Work
+
+### Planned Improvements
+- [ ] Test on external hospital datasets for generalization
+- [ ] Multi-class classification (bacterial vs viral pneumonia)
+- [ ] Integration with PACS systems
+- [ ] Ensemble with v4 and v5 models
+- [ ] Active learning for continuous improvement
+- [ ] Federated learning for privacy-preserving training
+- [ ] Explainability improvements (SHAP, LIME)
+- [ ] Mobile app optimization (model compression)
+
+### Research Directions
+- [ ] Self-supervised learning on unlabeled X-rays
+- [ ] Few-shot learning for rare pneumonia types
+- [ ] Multi-modal learning (X-ray + clinical data)
+- [ ] Uncertainty quantification
+- [ ] Adversarial robustness testing
+
+---
+
+**Latest Update:** December 2025 - Added ResNet50 standalone training and knowledge distillation v5 model
+**Status:** Production-ready, actively maintained
+**Best Model:** V5 (Knowledge Distilled) - 99.80% sensitivity, 1 FN

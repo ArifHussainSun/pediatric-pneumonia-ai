@@ -1,0 +1,91 @@
+# Training configuration for pediatric pneumonia detection models
+# Optimized for DGX station with 4x Tesla V100 GPUs
+
+# Model configuration
+model:
+  type: "xception"  # Options: xception, vgg, mobilenet, fusion, xception_lstm
+  params:
+    num_classes: 2
+    freeze_layers: 100
+    dropout_rate: 0.5
+
+# Training configuration
+training:
+  epochs: 100
+  batch_size: 32  # Per GPU batch size (effective batch size = 32 * 4 = 128)
+  gradient_accumulation_steps: 1
+  use_amp: true  # Automatic Mixed Precision for V100
+  max_grad_norm: 1.0
+
+# Optimizer configuration
+optimizer:
+  type: "adamw"
+  lr: 0.0001
+  weight_decay: 0.01
+  betas: [0.9, 0.999]
+
+# Learning rate scheduler
+scheduler:
+  type: "cosine"
+  min_lr: 0.000001
+
+# Loss function
+loss: "cross_entropy"  # Options: cross_entropy, bce, focal
+focal_alpha: 0.25  # For focal loss
+focal_gamma: 2.0   # For focal loss
+
+# Data configuration
+data:
+  dataset_path: "/path/to/your/dataset"
+  image_size: 224
+  num_workers: 8  # Per GPU workers
+  pin_memory: true
+  prefetch_factor: 2
+
+# Augmentation configuration
+augmentation:
+  horizontal_flip: 0.5
+  rotation: 10
+  brightness: 0.1
+  contrast: 0.1
+  normalize:
+    mean: [0.485, 0.456, 0.406]
+    std: [0.229, 0.224, 0.225]
+
+# Distributed training settings
+distributed:
+  backend: "nccl"
+  master_addr: "localhost"
+  master_port: 12355
+
+# Logging and checkpointing
+output_dir: "./outputs/experiment_1"
+log_interval: 50  # Log every N batches
+save_interval: 10  # Save checkpoint every N epochs
+
+# Model-specific configurations for different architectures
+model_configs:
+  xception:
+    freeze_layers: 100
+    dropout_rate: 0.5
+
+  vgg:
+    variant: "standard"  # standard, lightweight
+    freeze_layers: 10
+    dropout_rate: 0.5
+
+  mobilenet:
+    variant: "v2"  # v2, v3
+    size: "standard"  # standard, small, tiny
+    freeze_layers: 50
+
+  fusion:
+    model_type: "xception_vgg"
+    freeze_early_layers: true
+    dropout_rate: 0.5
+
+  xception_lstm:
+    model_type: "advanced"  # advanced, lightweight
+    freeze_layers: 100
+    lstm_units: 256
+    dropout_rate: 0.46

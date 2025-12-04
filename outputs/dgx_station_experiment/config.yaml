@@ -1,0 +1,118 @@
+augmentation:
+  brightness: 0.1
+  contrast: 0.1
+  horizontal_flip: 0.5
+  normalize:
+    mean:
+    - 0.485
+    - 0.456
+    - 0.406
+    std:
+    - 0.229
+    - 0.224
+    - 0.225
+  rotation: 5
+class_weights: true
+data:
+  cache_dataset: true
+  image_size: 224
+  num_workers: 6
+  persistent_workers: true
+  pin_memory: true
+  prefetch_factor: 2
+  preload_data: false
+  train_dir: data/train
+  val_dir: data/test
+distributed:
+  backend: nccl
+  master_addr: localhost
+  master_port: 12355
+  nccl_ib_disable: 1
+  nccl_p2p_disable: 0
+  nccl_tree_threshold: 0
+environment:
+  CUDA_LAUNCH_BLOCKING: '0'
+  CUDA_VISIBLE_DEVICES: 0,1,2,3
+  CUDNN_BENCHMARK: '1'
+  NCCL_DEBUG: INFO
+  NCCL_IB_DISABLE: '1'
+  NCCL_TREE_THRESHOLD: '0'
+  OMP_NUM_THREADS: '10'
+log_interval: 25
+loss: cross_entropy
+master_addr: localhost
+master_port: 12355
+memory:
+  allow_growth: true
+  gradient_checkpointing: false
+  max_memory_per_gpu: 30GB
+  memory_fraction: 0.9
+model:
+  params:
+    dropout_rate: 0.5
+    freeze_layers: 50
+    num_classes: 2
+  type: mobilenet
+model_configs:
+  fusion:
+    dropout_rate: 0.5
+    fallback_batch_size: 20
+    freeze_early_layers: true
+    model_type: xception_vgg
+  mobilenet:
+    freeze_layers: 50
+    size: standard
+    variant: v2
+  vgg:
+    dropout_rate: 0.5
+    freeze_layers: 10
+    lightweight_available: true
+    variant: standard
+  xception:
+    dropout_rate: 0.5
+    freeze_layers: 100
+    mixed_precision_loss_scale: 128
+    use_tensor_cores: true
+monitoring:
+  gpu_utilization_target: 85
+  log_system_stats: true
+  memory_utilization_target: 80
+  profile_memory: false
+optimizer:
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1e-8
+  fused_adamw: true
+  lr: 0.0001
+  type: adamw
+  weight_decay: 0.01
+output_dir: ./outputs/dgx_station_experiment
+save_interval: 5
+scheduler:
+  min_lr: 1.0e-06
+  type: cosine
+  warmup_epochs: 5
+scheduling:
+  checkpoint_on_preemption: true
+  max_runtime_hours: 48
+  priority: normal
+  resume_from_checkpoint: true
+system:
+  architecture: Volta
+  cpu_cores: 40
+  cuda_capability: '7.0'
+  gpu_count: 4
+  gpu_memory: 32GB
+  gpu_model: Tesla V100-DGS
+  system_memory: 256GB
+tensorboard_dir: ./outputs/tensorboard
+training:
+  batch_size: 48
+  epochs: 100
+  gradient_accumulation_steps: 1
+  max_grad_norm: 1.0
+  memory_efficient: true
+  optimize_for_volta: true
+  tensor_core_precision: true
+  use_amp: true

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pneumonia Detection</string>
+    <string name="select_image">Select X-Ray Image</string>
+    <string name="analyze">Analyze</string>
+    <string name="analyzing">Analyzing...</string>
+    <string name="normal_result">Normal</string>
+    <string name="pneumonia_result">Pneumonia Detected</string>
+    <string name="confidence">Confidence: %1$s%%</string>
+    <string name="quality_poor">Image quality is poor. Consider retaking with better lighting.</string>
+    <string name="error_no_image">Please select an image first</string>
+    <string name="error_analysis_failed">Analysis failed. Please try again.</string>
+</resources>

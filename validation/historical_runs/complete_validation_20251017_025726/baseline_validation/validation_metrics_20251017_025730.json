@@ -1,0 +1,7 @@
+{
+  "total_samples": 20,
+  "accuracy_raw": 0.95,
+  "accuracy_processed": 0.95,
+  "accuracy_improvement": 0.0,
+  "avg_confidence_improvement": 0.0,
+  "positive_improvements": 

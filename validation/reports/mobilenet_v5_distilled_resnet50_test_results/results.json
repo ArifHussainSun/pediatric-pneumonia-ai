@@ -1,0 +1,16 @@
+{
+  "seed": 2025,
+  "total": 1000,
+  "accuracy": 0.957,
+  "normal_accuracy": 0.916,
+  "pneumonia_accuracy": 0.998,
+  "false_positives": 42,
+  "false_negatives": 1,
+  "metrics": {
+    "sensitivity": 0.998,
+    "specificity": 0.916,
+    "precision": 0.922365988909427,
+    "f1_score": 0.9586935638808837
+  },
+  "preprocessing": "conservative_adaptive"
+}

@@ -1,0 +1,77 @@
+# API Deployment Configuration
+# Settings for production deployment of pneumonia detection REST API
+
+# Server configuration
+server:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  timeout_seconds: 30
+  max_request_size_mb: 10
+  log_level: "INFO"
+
+# CORS settings
+cors:
+  allow_origins: ["*"]
+  allow_credentials: true
+  allow_methods: ["GET", "POST", "OPTIONS"]
+  allow_headers: ["*"]
+
+# Model configuration
+models:
+  mobilenet:
+    file: "mobilenet_pneumonia.pth"
+    device: "cpu"
+    max_memory_mb: 512
+    warmup_samples: 5
+  vgg:
+    file: "vgg_pneumonia.pth"
+    device: "cpu"
+    max_memory_mb: 1024
+    warmup_samples: 3
+  xception:
+    file: "xception_pneumonia.pth"
+    device: "cpu"
+    max_memory_mb: 2048
+    warmup_samples: 2
+
+# Batch processing limits
+batch_processing:
+  max_concurrent: 5
+  max_batch_size: 20
+  timeout_seconds: 300
+  queue_size_limit: 100
+
+# Rate limiting
+rate_limiting:
+  requests_per_minute: 120
+  burst_limit: 10
+  enable_rate_limiting: true
+
+# Security settings
+security:
+  enable_auth: false
+  api_key_header: "X-API-Key"
+  allowed_ips: []
+  enable_https: false
+
+# Monitoring
+monitoring:
+  enable_metrics: true
+  metrics_endpoint: "/metrics"
+  health_check_interval: 30
+  log_requests: true
+  track_performance: true
+
+# Cache settings
+cache:
+  enable_model_cache: true
+  cache_ttl_seconds: 3600
+  max_cache_size_mb: 1024
+
+# Clinical settings
+clinical:
+  default_confidence_threshold: 0.5
+  enable_quality_checks: true
+  require_patient_id: false
+  audit_logging: true

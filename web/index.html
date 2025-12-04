@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pneumonia Detection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #999;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .upload-section, .results-section {
+            background: #2a2a2a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .upload-area {
+            border: 2px dashed #555;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            background: #1f1f1f;
+        }
+
+        .upload-area:hover {
+            border-color: #4a9eff;
+        }
+
+        .upload-text {
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        .upload-btn {
+            background: #4a9eff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .upload-btn:hover {
+            background: #3a8eef;
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 250px;
+            border-radius: 6px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-card {
+            background: #1f1f1f;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 20px;
+            display: none;
+        }
+
+        .diagnosis {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .diagnosis.normal {
+            color: #4caf50;
+        }
+
+        .diagnosis.pneumonia {
+            color: #f44336;
+        }
+
+        .confidence {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+
+        .probabilities {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .prob-item {
+            background: #333;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .prob-label {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .prob-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .metrics {
+            border-top: 1px solid #333;
+            padding-top: 15px;
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .spinner {
+            border: 3px solid #333;
+            border-top: 3px solid #4a9eff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-message {
+            background: #3a1f1f;
+            color: #ff6b6b;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            border: 1px solid #5a3030;
+            display: none;
+        }
+
+        .disclaimer {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .disclaimer-title {
+            color: #ffb74d;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .model-status {
+            background: #2a2a2a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .model-info-section {
+            background: #2a2a2a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .model-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-item {
+            background: #1f1f1f;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .info-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #4a9eff;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .model-info-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+        }
+
+        /* Quality notification styles */
+        .quality-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2a2a2a;
+            border: 1px solid #4a9eff;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 400px;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .notification-content h4 {
+            margin-bottom: 10px;
+            color: #4a9eff;
+            font-size: 16px;
+        }
+
+        .notification-content p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .notification-content button {
+            background: #4a9eff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .notification-content button:hover {
+            background: #357abd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Pneumonia Detection</h1>
+            <p>AI-powered chest X-ray analysis</p>
+        </div>
+
+        <div class="model-status">
+            <strong>Model Status:</strong> <span id="modelStatus">Checking...</span>
+        </div>
+
+        <div class="main-grid">
+            <div class="upload-section">
+                <h2 class="section-title">Upload X-Ray</h2>
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-text">
+                        Drop image here or click to browse
+                    </div>
+                    <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                        Choose File
+                    </button>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+                <img id="imagePreview" class="image-preview" alt="Preview">
+                <div class="error-message" id="errorMessage"></div>
+            </div>
+
+            <div class="results-section">
+                <h2 class="section-title">Results</h2>
+
+                <div class="loading" id="loadingIndicator">
+                    <div class="spinner"></div>
+                    <div>Analyzing...</div>
+                </div>
+
+                <div class="result-card" id="resultCard">
+                    <div class="diagnosis" id="diagnosis">NORMAL</div>
+                    <div class="confidence">Confidence: <span id="confidenceValue">--</span></div>
+
+                    <div class="probabilities">
+                        <div class="prob-item">
+                            <div class="prob-label">Normal</div>
+                            <div class="prob-value" id="normalProb">--</div>
+                        </div>
+                        <div class="prob-item">
+                            <div class="prob-label">Pneumonia</div>
+                            <div class="prob-value" id="pneumoniaProb">--</div>
+                        </div>
+                    </div>
+
+                    <div class="metrics">
+                        <div>Time: <span id="inferenceTime">--</span> ms</div>
+                        <div>Model: <span id="modelName">--</span></div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; padding: 40px; color: #666;">
+                    Upload an image to see results
+                </div>
+            </div>
+        </div>
+
+        <!-- Model Information Section -->
+        <div class="model-info-section">
+            <h2 class="section-title">Model Information & Metrics</h2>
+            <div class="model-info-grid">
+                <div class="info-item">
+                    <div class="info-label">Model Architecture</div>
+                    <div class="info-value" id="modelArchitecture">MobileNetV1</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Accuracy</div>
+                    <div class="info-value" id="modelAccuracy">97.07%</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Precision</div>
+                    <div class="info-value" id="modelPrecision">96.8%</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Recall</div>
+                    <div class="info-value" id="modelRecall">97.3%</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">F1-Score</div>
+                    <div class="info-value" id="modelF1">97.05%</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Parameters</div>
+                    <div class="info-value" id="modelParameters">3.4M</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Model Size</div>
+                    <div class="info-value" id="modelSize">13.7 MB</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Framework</div>
+                    <div class="info-value" id="framework">PyTorch + timm</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="app.js?v=20251008"></script>
+</body>
+</html>

@@ -1,0 +1,1031 @@
+[
+  {
+    "index": 1,
+    "filename": "person1022_virus_1712.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person1022_virus_1712.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.9765397310256958,
+      "pneumonia_prob": 0.02346024289727211
+    },
+    "metrics": {
+      "brightness": 0.5073293396402007,
+      "contrast": 0.22246613451157413,
+      "sharpness": 0.010662992547393585,
+      "histogram_std": 0.0038769450038671494,
+      "histogram_entropy": 7.385622978210449,
+      "edge_density": 0.005170302421808446,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 129.36898160825118,
+      "median_intensity": 138.0,
+      "p10": 34.0,
+      "p25": 101.0,
+      "p75": 175.0,
+      "p90": 196.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.02346024289727211,
+        "normal_prob": 0.9765397310256958
+      },
+      "conservative": {
+        "pneumonia_prob": 0.02346024289727211,
+        "normal_prob": 0.9765397310256958,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.0010349334916099906,
+        "normal_prob": 0.9989650249481201
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.0011367399711161852,
+        "normal_prob": 0.9988632202148438
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.0021545742638409138,
+        "normal_prob": 0.9978454113006592
+      }
+    }
+  },
+  {
+    "index": 2,
+    "filename": "person1589_bacteria_4172.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person1589_bacteria_4172.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.8784662485122681,
+      "pneumonia_prob": 0.12153367698192596
+    },
+    "metrics": {
+      "brightness": 0.3677371045317352,
+      "contrast": 0.21501020843700558,
+      "sharpness": 0.023427189085349447,
+      "histogram_std": 0.0033159300219267607,
+      "histogram_entropy": 7.393341064453125,
+      "edge_density": 0.01468484680693983,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 93.77296165559247,
+      "median_intensity": 100.0,
+      "p10": 9.0,
+      "p25": 47.0,
+      "p75": 144.0,
+      "p90": 159.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.12153367698192596,
+        "normal_prob": 0.8784662485122681
+      },
+      "conservative": {
+        "pneumonia_prob": 0.12153367698192596,
+        "normal_prob": 0.8784662485122681,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.9017221927642822,
+        "normal_prob": 0.09827781468629837
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.9668598771095276,
+        "normal_prob": 0.03314008191227913
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.8902769684791565,
+        "normal_prob": 0.1097230538725853
+      }
+    }
+  },
+  {
+    "index": 3,
+    "filename": "person441_virus_894.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person441_virus_894.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.9954054355621338,
+      "pneumonia_prob": 0.004594594240188599
+    },
+    "metrics": {
+      "brightness": 0.35731489329285876,
+      "contrast": 0.1840099423908542,
+      "sharpness": 0.006788949856227002,
+      "histogram_std": 0.0074033294804394245,
+      "histogram_entropy": 6.884406089782715,
+      "edge_density": 0.0029025463219590876,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 91.11529778967899,
+      "median_intensity": 100.0,
+      "p10": 0.0,
+      "p25": 67.0,
+      "p75": 126.0,
+      "p90": 145.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.004594594240188599,
+        "normal_prob": 0.9954054355621338
+      },
+      "conservative": {
+        "pneumonia_prob": 0.004594594240188599,
+        "normal_prob": 0.9954054355621338,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.006025231909006834,
+        "normal_prob": 0.9939747452735901
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.34225359559059143,
+        "normal_prob": 0.6577463746070862
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.004639551043510437,
+        "normal_prob": 0.9953604340553284
+      }
+    }
+  },
+  {
+    "index": 4,
+    "filename": "person1405_virus_2408.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person1405_virus_2408.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.9606980681419373,
+      "pneumonia_prob": 0.03930192068219185
+    },
+    "metrics": {
+      "brightness": 0.42560335431413465,
+      "contrast": 0.2759958602660096,
+      "sharpness": 0.009654601361543431,
+      "histogram_std": 0.010826114565134048,
+      "histogram_entropy": 6.948805332183838,
+      "edge_density": 0.005213616537213077,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 108.52885535010434,
+      "median_intensity": 123.0,
+      "p10": 0.0,
+      "p25": 42.0,
+      "p75": 169.0,
+      "p90": 194.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.03930192068219185,
+        "normal_prob": 0.9606980681419373
+      },
+      "conservative": {
+        "pneumonia_prob": 0.03930192068219185,
+        "normal_prob": 0.9606980681419373,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.007794891018420458,
+        "normal_prob": 0.9922050833702087
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.0142067177221179,
+        "normal_prob": 0.9857932925224304
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.006168658379465342,
+        "normal_prob": 0.9938312768936157
+      }
+    }
+  },
+  {
+    "index": 5,
+    "filename": "person104_virus_191.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person104_virus_191.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.9819858074188232,
+      "pneumonia_prob": 0.01801418699324131
+    },
+    "metrics": {
+      "brightness": 0.3777162881538557,
+      "contrast": 0.23863933331463494,
+      "sharpness": 0.0069836988163713325,
+      "histogram_std": 0.006693807430565357,
+      "histogram_entropy": 7.354081630706787,
+      "edge_density": 0.009673563985136344,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 96.31765347923321,
+      "median_intensity": 98.0,
+      "p10": 0.0,
+      "p25": 46.0,
+      "p75": 148.0,
+      "p90": 177.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.01801418699324131,
+        "normal_prob": 0.9819858074188232
+      },
+      "conservative": {
+        "pneumonia_prob": 0.01801418699324131,
+        "normal_prob": 0.9819858074188232,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.9882489442825317,
+        "normal_prob": 0.011751055717468262
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.997161865234375,
+        "normal_prob": 0.0028381377924233675
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.9885275363922119,
+        "normal_prob": 0.011472484096884727
+      }
+    }
+  },
+  {
+    "index": 6,
+    "filename": "person1461_virus_2510.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person1461_virus_2510.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.9942032694816589,
+      "pneumonia_prob": 0.005796709097921848
+    },
+    "metrics": {
+      "brightness": 0.38803716793830506,
+      "contrast": 0.24155433995856948,
+      "sharpness": 0.006736637489021828,
+      "histogram_std": 0.005432329140603542,
+      "histogram_entropy": 7.491943359375,
+      "edge_density": 0.008770432357043235,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 98.94947782426779,
+      "median_intensity": 96.0,
+      "p10": 9.0,
+      "p25": 50.0,
+      "p75": 151.0,
+      "p90": 184.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.005796709097921848,
+        "normal_prob": 0.9942032694816589
+      },
+      "conservative": {
+        "pneumonia_prob": 0.005796709097921848,
+        "normal_prob": 0.9942032694816589,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.7050090432167053,
+        "normal_prob": 0.2949908971786499
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.9252200126647949,
+        "normal_prob": 0.07478000223636627
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.8257114291191101,
+        "normal_prob": 0.1742885559797287
+      }
+    }
+  },
+  {
+    "index": 7,
+    "filename": "person362_bacteria_1652.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person362_bacteria_1652.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.6240442991256714,
+      "pneumonia_prob": 0.3759557604789734
+    },
+    "metrics": {
+      "brightness": 0.5449842314903498,
+      "contrast": 0.22676432747369657,
+      "sharpness": 0.007587894554003125,
+      "histogram_std": 0.004182185046374798,
+      "histogram_entropy": 7.436614513397217,
+      "edge_density": 0.007945005088195387,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 138.9709790300392,
+      "median_intensity": 148.0,
+      "p10": 49.0,
+      "p25": 110.0,
+      "p75": 183.0,
+      "p90": 205.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.3759557604789734,
+        "normal_prob": 0.6240442991256714
+      },
+      "conservative": {
+        "pneumonia_prob": 0.3759557604789734,
+        "normal_prob": 0.6240442991256714,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.9977843165397644,
+        "normal_prob": 0.002215728862211108
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.999397873878479,
+        "normal_prob": 0.0006020989967510104
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.9970118999481201,
+        "normal_prob": 0.0029880788642913103
+      }
+    }
+  },
+  {
+    "index": 8,
+    "filename": "person1481_virus_2567.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person1481_virus_2567.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.9998656511306763,
+      "pneumonia_prob": 0.00013433404092211276
+    },
+    "metrics": {
+      "brightness": 0.4907414707872971,
+      "contrast": 0.23178730452679722,
+      "sharpness": 0.005402916367000169,
+      "histogram_std": 0.004323190078139305,
+      "histogram_entropy": 7.489960670471191,
+      "edge_density": 0.004277287521075298,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 125.13907505076075,
+      "median_intensity": 132.0,
+      "p10": 42.0,
+      "p25": 86.0,
+      "p75": 173.0,
+      "p90": 198.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.00013433404092211276,
+        "normal_prob": 0.9998656511306763
+      },
+      "conservative": {
+        "pneumonia_prob": 0.00013433404092211276,
+        "normal_prob": 0.9998656511306763,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.018353015184402466,
+        "normal_prob": 0.9816469550132751
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.19859158992767334,
+        "normal_prob": 0.8014084100723267
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.007115601561963558,
+        "normal_prob": 0.9928843975067139
+      }
+    }
+  },
+  {
+    "index": 9,
+    "filename": "person52_bacteria_251.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person52_bacteria_251.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.7783973813056946,
+      "pneumonia_prob": 0.221602663397789
+    },
+    "metrics": {
+      "brightness": 0.4736976478774638,
+      "contrast": 0.2590670394229539,
+      "sharpness": 0.008385834717939362,
+      "histogram_std": 0.005522998049855232,
+      "histogram_entropy": 7.503019332885742,
+      "edge_density": 0.011564777629034658,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 120.79290020875328,
+      "median_intensity": 131.0,
+      "p10": 9.0,
+      "p25": 72.0,
+      "p75": 175.0,
+      "p90": 201.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.221602663397789,
+        "normal_prob": 0.7783973813056946
+      },
+      "conservative": {
+        "pneumonia_prob": 0.221602663397789,
+        "normal_prob": 0.7783973813056946,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.9918472766876221,
+        "normal_prob": 0.008152684196829796
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.9975335597991943,
+        "normal_prob": 0.0024664420634508133
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.9920505881309509,
+        "normal_prob": 0.007949386723339558
+      }
+    }
+  },
+  {
+    "index": 10,
+    "filename": "person290_virus_594.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person290_virus_594.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.6962034106254578,
+      "pneumonia_prob": 0.30379655957221985
+    },
+    "metrics": {
+      "brightness": 0.32190085516381883,
+      "contrast": 0.17330840921929058,
+      "sharpness": 0.00672930690182438,
+      "histogram_std": 0.004281590227037668,
+      "histogram_entropy": 7.177645683288574,
+      "edge_density": 0.004572792003213939,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 82.0847180667738,
+      "median_intensity": 69.0,
+      "p10": 32.0,
+      "p25": 52.0,
+      "p75": 102.0,
+      "p90": 158.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.30379655957221985,
+        "normal_prob": 0.6962034106254578
+      },
+      "conservative": {
+        "pneumonia_prob": 0.30379655957221985,
+        "normal_prob": 0.6962034106254578,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.25374922156333923,
+        "normal_prob": 0.7462508082389832
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.042684148997068405,
+        "normal_prob": 0.9573158025741577
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.8570131063461304,
+        "normal_prob": 0.14298689365386963
+      }
+    }
+  },
+  {
+    "index": 11,
+    "filename": "person1477_virus_2561.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person1477_virus_2561.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.9973464012145996,
+      "pneumonia_prob": 0.002653594361618161
+    },
+    "metrics": {
+      "brightness": 0.4576290634603468,
+      "contrast": 0.2608213443837773,
+      "sharpness": 0.006074646568546237,
+      "histogram_std": 0.00593614624813199,
+      "histogram_entropy": 7.479901313781738,
+      "edge_density": 0.007151770541352346,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 116.69541118238844,
+      "median_intensity": 120.0,
+      "p10": 6.0,
+      "p25": 68.0,
+      "p75": 176.0,
+      "p90": 202.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.002653594361618161,
+        "normal_prob": 0.9973464012145996
+      },
+      "conservative": {
+        "pneumonia_prob": 0.002653594361618161,
+        "normal_prob": 0.9973464012145996,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.07863716781139374,
+        "normal_prob": 0.9213628768920898
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.8238797783851624,
+        "normal_prob": 0.17612023651599884
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.041490327566862106,
+        "normal_prob": 0.958509624004364
+      }
+    }
+  },
+  {
+    "index": 12,
+    "filename": "person498_bacteria_2100.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person498_bacteria_2100.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.738789439201355,
+      "pneumonia_prob": 0.2612105906009674
+    },
+    "metrics": {
+      "brightness": 0.4111777285166312,
+      "contrast": 0.23438352164317183,
+      "sharpness": 0.009109440656191946,
+      "histogram_std": 0.008068257011473179,
+      "histogram_entropy": 7.066380500793457,
+      "edge_density": 0.01158976950632929,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 104.85032077174095,
+      "median_intensity": 115.0,
+      "p10": 0.0,
+      "p25": 65.0,
+      "p75": 157.0,
+      "p90": 174.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.2612105906009674,
+        "normal_prob": 0.738789439201355
+      },
+      "conservative": {
+        "pneumonia_prob": 0.2612105906009674,
+        "normal_prob": 0.738789439201355,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.9058957099914551,
+        "normal_prob": 0.09410423040390015
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.9984667897224426,
+        "normal_prob": 0.001533225760795176
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.8897432684898376,
+        "normal_prob": 0.11025673151016235
+      }
+    }
+  },
+  {
+    "index": 13,
+    "filename": "person1156_virus_1936.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person1156_virus_1936.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.963625431060791,
+      "pneumonia_prob": 0.03637458756566048
+    },
+    "metrics": {
+      "brightness": 0.40443332021789674,
+      "contrast": 0.23683100610495642,
+      "sharpness": 0.007399334192795842,
+      "histogram_std": 0.005718759726732969,
+      "histogram_entropy": 7.399718284606934,
+      "edge_density": 0.008701627535407696,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 103.13049665556368,
+      "median_intensity": 103.0,
+      "p10": 11.0,
+      "p25": 57.0,
+      "p75": 155.0,
+      "p90": 184.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.03637458756566048,
+        "normal_prob": 0.963625431060791
+      },
+      "conservative": {
+        "pneumonia_prob": 0.03637458756566048,
+        "normal_prob": 0.963625431060791,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.9720829129219055,
+        "normal_prob": 0.02791709452867508
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.9985716342926025,
+        "normal_prob": 0.0014283939963206649
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.9695371389389038,
+        "normal_prob": 0.03046286478638649
+      }
+    }
+  },
+  {
+    "index": 14,
+    "filename": "person485_bacteria_2049.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person485_bacteria_2049.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.9999247789382935,
+      "pneumonia_prob": 7.517569611081854e-05
+    },
+    "metrics": {
+      "brightness": 0.44124757725044483,
+      "contrast": 0.20134449286138656,
+      "sharpness": 0.005871711673004253,
+      "histogram_std": 0.004180101677775383,
+      "histogram_entropy": 7.375527858734131,
+      "edge_density": 0.002476943485034074,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 112.51813219886343,
+      "median_intensity": 117.0,
+      "p10": 42.0,
+      "p25": 79.0,
+      "p75": 153.0,
+      "p90": 175.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 7.517569611081854e-05,
+        "normal_prob": 0.9999247789382935
+      },
+      "conservative": {
+        "pneumonia_prob": 7.517569611081854e-05,
+        "normal_prob": 0.9999247789382935,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.004014758393168449,
+        "normal_prob": 0.9959852695465088
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.007287124637514353,
+        "normal_prob": 0.9927127957344055
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.003325190395116806,
+        "normal_prob": 0.9966747760772705
+      }
+    }
+  },
+  {
+    "index": 15,
+    "filename": "person1175_virus_1981.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person1175_virus_1981.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.9999853372573853,
+      "pneumonia_prob": 1.4631342310167383e-05
+    },
+    "metrics": {
+      "brightness": 0.41436978172911676,
+      "contrast": 0.2565185941754429,
+      "sharpness": 0.005435463018552862,
+      "histogram_std": 0.007561812177300453,
+      "histogram_entropy": 7.309184551239014,
+      "edge_density": 0.0031610470275066547,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 105.66429434092477,
+      "median_intensity": 106.0,
+      "p10": 0.0,
+      "p25": 55.0,
+      "p75": 162.0,
+      "p90": 191.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 1.4631342310167383e-05,
+        "normal_prob": 0.9999853372573853
+      },
+      "conservative": {
+        "pneumonia_prob": 1.4631342310167383e-05,
+        "normal_prob": 0.9999853372573853,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.011823245324194431,
+        "normal_prob": 0.9881767630577087
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.1060369685292244,
+        "normal_prob": 0.893963098526001
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.010530487634241581,
+        "normal_prob": 0.9894695281982422
+      }
+    }
+  },
+  {
+    "index": 16,
+    "filename": "person1429_bacteria_3688.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person1429_bacteria_3688.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.9430314302444458,
+      "pneumonia_prob": 0.056968532502651215
+    },
+    "metrics": {
+      "brightness": 0.6174926868967402,
+      "contrast": 0.2676035811554923,
+      "sharpness": 0.018653485148508016,
+      "histogram_std": 0.0031190402805805206,
+      "histogram_entropy": 7.556629657745361,
+      "edge_density": 0.00475952442380461,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 157.46063515866874,
+      "median_intensity": 172.0,
+      "p10": 46.0,
+      "p25": 118.0,
+      "p75": 213.0,
+      "p90": 236.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.056968532502651215,
+        "normal_prob": 0.9430314302444458
+      },
+      "conservative": {
+        "pneumonia_prob": 0.056968532502651215,
+        "normal_prob": 0.9430314302444458,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.9118615984916687,
+        "normal_prob": 0.0881383940577507
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.8935843706130981,
+        "normal_prob": 0.10641563683748245
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.9529582858085632,
+        "normal_prob": 0.0470416396856308
+      }
+    }
+  },
+  {
+    "index": 17,
+    "filename": "person460_virus_948.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person460_virus_948.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.6731839179992676,
+      "pneumonia_prob": 0.32681605219841003
+    },
+    "metrics": {
+      "brightness": 0.38827178736908946,
+      "contrast": 0.1757826442850518,
+      "sharpness": 0.007185291231864518,
+      "histogram_std": 0.0033936575055122375,
+      "histogram_entropy": 7.302399635314941,
+      "edge_density": 0.005006877042091101,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 99.00930577911781,
+      "median_intensity": 93.0,
+      "p10": 36.0,
+      "p25": 63.0,
+      "p75": 140.0,
+      "p90": 160.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.32681605219841003,
+        "normal_prob": 0.6731839179992676
+      },
+      "conservative": {
+        "pneumonia_prob": 0.32681605219841003,
+        "normal_prob": 0.6731839179992676,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.05151430517435074,
+        "normal_prob": 0.9484857320785522
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.12019548565149307,
+        "normal_prob": 0.8798045516014099
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.03535126894712448,
+        "normal_prob": 0.9646487832069397
+      }
+    }
+  },
+  {
+    "index": 18,
+    "filename": "person820_virus_1456.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person820_virus_1456.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.999907374382019,
+      "pneumonia_prob": 9.259084617951885e-05
+    },
+    "metrics": {
+      "brightness": 0.4476644017920614,
+      "contrast": 0.21058946562759087,
+      "sharpness": 0.006553939786241905,
+      "histogram_std": 0.003040481824427843,
+      "histogram_entropy": 7.547369480133057,
+      "edge_density": 0.006141943163219759,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 114.15442245697565,
+      "median_intensity": 121.0,
+      "p10": 39.0,
+      "p25": 72.0,
+      "p75": 159.0,
+      "p90": 179.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 9.259084617951885e-05,
+        "normal_prob": 0.999907374382019
+      },
+      "conservative": {
+        "pneumonia_prob": 9.259084617951885e-05,
+        "normal_prob": 0.999907374382019,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.02729666233062744,
+        "normal_prob": 0.9727033376693726
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.5072019100189209,
+        "normal_prob": 0.4927980601787567
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.027689578011631966,
+        "normal_prob": 0.9723104238510132
+      }
+    }
+  },
+  {
+    "index": 19,
+    "filename": "person299_virus_620.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person299_virus_620.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.5651811957359314,
+      "pneumonia_prob": 0.4348188042640686
+    },
+    "metrics": {
+      "brightness": 0.47145498100252764,
+      "contrast": 0.22415771919801922,
+      "sharpness": 0.005562743189269779,
+      "histogram_std": 0.0035053954925388098,
+      "histogram_entropy": 7.556448459625244,
+      "edge_density": 0.005388948585197486,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 120.22102015564455,
+      "median_intensity": 122.0,
+      "p10": 44.0,
+      "p25": 79.0,
+      "p75": 168.0,
+      "p90": 192.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.4348188042640686,
+        "normal_prob": 0.5651811957359314
+      },
+      "conservative": {
+        "pneumonia_prob": 0.4348188042640686,
+        "normal_prob": 0.5651811957359314,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.9900741577148438,
+        "normal_prob": 0.009925865568220615
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.9990429282188416,
+        "normal_prob": 0.0009570983238518238
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.9871841073036194,
+        "normal_prob": 0.012815922498703003
+      }
+    }
+  },
+  {
+    "index": 20,
+    "filename": "person733_bacteria_2635.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person733_bacteria_2635.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.699514627456665,
+      "pneumonia_prob": 0.30048540234565735
+    },
+    "metrics": {
+      "brightness": 0.5202073894723497,
+      "contrast": 0.19754777730080442,
+      "sharpness": 0.012788718477515315,
+      "histogram_std": 0.003158717881888151,
+      "histogram_entropy": 7.422109127044678,
+      "edge_density": 0.014247887363883847,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 132.65288431544917,
+      "median_intensity": 140.0,
+      "p10": 65.0,
+      "p25": 99.0,
+      "p75": 175.0,
+      "p90": 193.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.30048540234565735,
+        "normal_prob": 0.699514627456665
+      },
+      "conservative": {
+        "pneumonia_prob": 0.30048540234565735,
+        "normal_prob": 0.699514627456665,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.08761461824178696,
+        "normal_prob": 0.9123854041099548
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.04732932895421982,
+        "normal_prob": 0.9526706337928772
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.10215350985527039,
+        "normal_prob": 0.897846519947052
+      }
+    }
+  },
+  {
+    "index": 21,
+    "filename": "person702_virus_1299.jpeg",
+    "path": "/Users/Adam/Downloads/College/Co op/Tech4Life-25Summer/chest_xray/train/PNEUMONIA/person702_virus_1299.jpeg",
+    "original_prediction": {
+      "normal_prob": 0.9949513673782349,
+      "pneumonia_prob": 0.00504858884960413
+    },
+    "metrics": {
+      "brightness": 0.45368841127532034,
+      "contrast": 0.2743841004557851,
+      "sharpness": 0.005567551325614291,
+      "histogram_std": 0.007191907148808241,
+      "histogram_entropy": 7.376957893371582,
+      "edge_density": 0.005830902755600974,
+      "min_intensity": 0,
+      "max_intensity": 255,
+      "mean_intensity": 115.69054487520668,
+      "median_intensity": 125.0,
+      "p10": 0.0,
+      "p25": 59.0,
+      "p75": 177.0,
+      "p90": 202.0,
+      "dynamic_range": 1.0
+    },
+    "preprocessing_tests": {
+      "none": {
+        "pneumonia_prob": 0.00504858884960413,
+        "normal_prob": 0.9949513673782349
+      },
+      "conservative": {
+        "pneumonia_prob": 0.00504858884960413,
+        "normal_prob": 0.9949513673782349,
+        "enhanced": true
+      },
+      "light_global": {
+        "pneumonia_prob": 0.6162710189819336,
+        "normal_prob": 0.38372907042503357
+      },
+      "medium_global": {
+        "pneumonia_prob": 0.27155250310897827,
+        "normal_prob": 0.7284475564956665
+      },
+      "roi_clahe": {
+        "pneumonia_prob": 0.764704704284668,
+        "normal_prob": 0.23529531061649323
+      }
+    }
+  }
+]
