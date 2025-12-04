@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Pediatric Pneumonia AI Detection System
 
 An advanced deep learning system for automated pediatric pneumonia detection from chest X-ray images, achieving **99.80% sensitivity** with only **1 false negative** out of 500 pneumonia cases through innovative CLAHE augmentation and knowledge distillation techniques.
@@ -1078,3 +1079,7 @@ If you use this work in your research, please cite:
 **Latest Update:** December 2025 - Added ResNet50 standalone training and knowledge distillation v5 model
 **Status:** Production-ready, actively maintained
 **Best Model:** V5 (Knowledge Distilled) - 99.80% sensitivity, 1 FN
+=======
+# pediatric-pneumonia-ai
+pediatric-pneumonia-ai
+>>>>>>> 9496ec060ce1232b724eda1e37f8c9b5a973b7dd
