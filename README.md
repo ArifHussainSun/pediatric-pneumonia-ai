@@ -1036,7 +1036,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-- **Project Maintainer:** Seyon Sriskandarajah
+- **Project Maintainer:** Arif Hussain
 - **GitHub:** [ArifHussainSun/pediatric-pneumonia-ai](https://github.com/ArifHussainSun/pediatric-pneumonia-ai)
 - **Issues:** [GitHub Issues](https://github.com/ArifHussainSun/pediatric-pneumonia-ai/issues)
 
