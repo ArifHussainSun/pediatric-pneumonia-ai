@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Pediatric Pneumonia AI Detection System
 
 An advanced deep learning system for automated pediatric pneumonia detection from chest X-ray images, achieving **99.80% sensitivity** with only **1 false negative** out of 500 pneumonia cases through innovative CLAHE augmentation and knowledge distillation techniques.
@@ -41,7 +41,7 @@ Tested on 1,000-image stratified test set (500 normal + 500 pneumonia cases):
 
 ```bash
 # Clone the repository
-git clone https://github.com/iShaldam/pediatric-pneumonia-ai.git
+git clone https://github.com/ArifHussainSun/pediatric-pneumonia-ai
 cd pediatric-pneumonia-ai
 
 # Install dependencies
@@ -946,7 +946,7 @@ bash scripts/validate_model.sh outputs/mobilenet_v5_distilled_resnet50/
 
 ```bash
 # Clone repository
-git clone https://github.com/iShaldam/pediatric-pneumonia-ai.git
+git clone https://github.com/ArifHussainSun/pediatric-pneumonia-ai
 cd pediatric-pneumonia-ai
 
 # Create virtual environment
@@ -1037,8 +1037,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 - **Project Maintainer:** Seyon Sriskandarajah
-- **GitHub:** [iShaldam/pediatric-pneumonia-ai](https://github.com/iShaldam/pediatric-pneumonia-ai)
-- **Issues:** [GitHub Issues](https://github.com/iShaldam/pediatric-pneumonia-ai/issues)
+- **GitHub:** [ArifHussainSun/pediatric-pneumonia-ai](https://github.com/ArifHussainSun/pediatric-pneumonia-ai)
+- **Issues:** [GitHub Issues](https://github.com/ArifHussainSun/pediatric-pneumonia-ai/issues)
 
 ## Citation
 
@@ -1050,7 +1050,7 @@ If you use this work in your research, please cite:
   title = {Pediatric Pneumonia AI Detection System with CLAHE Augmentation},
   year = {2025},
   publisher = {GitHub},
-  url = {https://github.com/iShaldam/pediatric-pneumonia-ai},
+  url = {https://github.com/ArifHussainSun/pediatric-pneumonia-ai},
   note = {Achieved 99.80\% sensitivity with knowledge distillation}
 }
 ```
@@ -1082,4 +1082,4 @@ If you use this work in your research, please cite:
 =======
 # pediatric-pneumonia-ai
 pediatric-pneumonia-ai
->>>>>>> 9496ec060ce1232b724eda1e37f8c9b5a973b7dd
+
